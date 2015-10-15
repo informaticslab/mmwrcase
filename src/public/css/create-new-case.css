@@ -277,7 +277,7 @@ textarea{
 .angular-ui-tree-handle {
     background: #f8faff;
     border: 1px solid #dae2ea;
-    color: #7c9eb2;
+    color: #555555;
     padding: 10px 10px;
 }
 
@@ -297,10 +297,14 @@ textarea{
 
 
 .topic-title {
-    background-color: #503608 !important;
+    background-color: #919ca4 !important;
     color: #FFF !important;
+    font-size:16px;
+    font-weight:normal;
 }
-
+.angular-ui-tree-nodes .angular-ui-tree-nodes {
+    padding-left: 0;
+}
 
 .form-topic {
   display: inline-block;

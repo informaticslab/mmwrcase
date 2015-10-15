@@ -114,11 +114,13 @@ div(ng-controller="createCaseCtrl" style="background-color:#eee;")
 																	i.glyphicon.glyphicon-trash
 																a.del-edit-btn.btn.btn-default.btn-xs.pull-right(ng-show="hoverSubTopic" href='', data-nodrag='', ng-click='editAnswer(answer)')
 																	i.glyphicon.glyphicon-pencil
-																.well
+																.well(style="background-color:#ffffff;")
 																	.row
-																		.col-lg-1.col-md-1.col-sm-1.col-xs-2(align='center')
+																		//.col-lg-1.col-md-1.col-sm-1.col-xs-2(align='center')
 																			input(type='radio' name='pre_{{question.question.question_id}}' ng-value='1' ng-model='answer.correct' ng-change='setCorrectAnswer(question,answer)')
-																		.col-lg-10.col-md-10.col.sm-10.col-xs-9
+																		//.col-lg-10.col-md-10.col.sm-10.col-xs-9
+																			| {{answer.answer}}
+																		.col-lg-12.col-md-12.col.sm-12.col-xs-12
 																			| {{answer.answer}}
 															.subTopic-title.angular-ui-tree-handle(data-nodrag='', ng-show='answer.editing')
 																label.sr-only(for='subTopicName') SubTopic name
@@ -129,7 +131,7 @@ div(ng-controller="createCaseCtrl" style="background-color:#eee;")
 																form.form-inline(role='form')
 																	.form-topic
 																		label.sr-only(for='subTopicName') SubTopic name
-																		textarea.form-control(rows='2' cols='60', ng-model='question.newAnswerText', placeholder='Enter answer text to add answer' ng-keyup='$event.keyCode==13 ? addAnswer(question,$event) : null' ng-blur='addAnswer(question,$event)')
+																		textarea.form-control(rows='2' cols='60', ng-model='question.newAnswerText', placeholder='Add an answer' ng-keyup='$event.keyCode==13 ? addAnswer(question,$event) : null' ng-blur='addAnswer(question,$event)')
 											br
 											ol.angular-ui-tree-nodes
 												li.angular-ui-tree-node
@@ -137,7 +139,7 @@ div(ng-controller="createCaseCtrl" style="background-color:#eee;")
 														form.form-inline(role='form')
 															.form-topic
 																label.sr-only(for='questionText' ) Question Text
-																textarea#topicName.form-control(rows='2' cols='100'   placeholder='Enter question text to add new question' ng-model="qa.pre.newQuestionText" ng-keyup='$event.keyCode==13 ? addQuestion(qa.pre,"pre",$event) : null' ng-blur='addQuestion(qa.pre,"pre",$event)')
+																textarea#topicName.form-control(rows='2' cols='100'   placeholder='Add a question' ng-model="qa.pre.newQuestionText" ng-keyup='$event.keyCode==13 ? addQuestion(qa.pre,"pre",$event) : null' ng-blur='addQuestion(qa.pre,"pre",$event)')
 									//.row
 										.col-lg-6
 											h3 Data binding
@@ -155,17 +157,19 @@ div(ng-controller="createCaseCtrl" style="background-color:#eee;")
 												.well
 													.form(name='uploadForm')
 														fieldset
-															input(type='file', ngf-select= '', ng-model='imageUpload.imageFile', name='file', accept='image/*', required='' ngf-clear-arq='' ngf-reset-on-click='')
+															input(type='file', ngf-select= '', ng-model='imageUpload.imageFile', name='file', accept='image/*', required='' ngf-clear-arq='' ngf-reset-on-click='' style='width:100%;')
 															br
-															.col-xs-6.col-md-4.col-lg-3
-																div.preview-thumbnail
-																	img.img-thumbnail.img-responsive(id='uploadThumb' ng-show='imageUpload.imageFile != null', ngf-src='imageUpload.imageFile' src='')
-															.col-xs-6.col-md-4.col-lg-3
+															.col-sm-12.col-md-12.col-lg-4
+																div.preview-thumbnail.img-responsive
+																	a.thumbnail.img-responsive
+																		img.img-thumbnail.img-responsive(id='uploadThumb' ng-show='imageUpload.imageFile != null', ngf-src='imageUpload.imageFile' src='')
+															.col-sm-12.col-md-6.col-lg-6
 																div
 																	label Image Title
-																		input.form-control(type='text' placeholder='enter a title' ng-model='imageUpload.imageTitle')
+																		input.form-control(type='text' placeholder='Enter a title' ng-model='imageUpload.imageTitle')
 																	label Image Caption
-																		input.form-control(type='text' placeholder='Enter image caption (45 characters max)' ng-model='imageUpload.imageCaption' style='width:320px')
+																		input.form-control(type='text' placeholder='Enter caption - 45 characters max' ng-model='imageUpload.imageCaption' style='width:280px;')
+															.col-lg-2
 														button.btn.btn-primary(ng-click='uploadFile(imageUpload)') Upload
 										br
 										.row
@@ -234,22 +238,22 @@ div(ng-controller="createCaseCtrl" style="background-color:#eee;")
 																	i.glyphicon.glyphicon-trash
 																a.del-edit-btn.btn.btn-default.btn-xs.pull-right(ng-show="hoverSubTopic" href='', data-nodrag='', ng-click='editAnswer(answer)')
 																	i.glyphicon.glyphicon-pencil
-																.well
+																.well(style="background-color:#ffffff;")
 																	.row
-																		.col-lg-1.col-md-1.col-sm-1.col-xs-2(align='center')
+																		//.col-lg-1.col-md-1.col-sm-1.col-xs-2(align='center')
 																			input(type='radio' name='post_{{question.question.question_id}}' ng-value='1' ng-model='answer.correct'  ng-change='setCorrectAnswer(question,answer)')
-																		.col-lg-10.col-md-10.col.sm-10.col-xs-9
+																		.col-lg-12.col-md-12.col.sm-12.col-xs-12
 																			| {{answer.answer}}
 															.subTopic-title.angular-ui-tree-handle(data-nodrag='', ng-show='answer.editing')
 																label.sr-only(for='subTopicName') SubTopic name
-																textarea.form-control(rows='2' cols='60', ng-model='answer.answer', placeholder='Enter answer text to add answer' ng-keyup='$event.keyCode==13 ? saveAnswer(answer,$event) : null' ng-blur='saveAnswer(answer,$event)')
+																textarea.form-control(rows='2' cols='60', ng-model='answer.answer', placeholder='Add an answer' ng-keyup='$event.keyCode==13 ? saveAnswer(answer,$event) : null' ng-blur='saveAnswer(answer,$event)')
 													ol.angular-ui-tree-nodes(data-nodrag='')
 														li.angular-ui-tree-node
 															.subTopic-title.angular-ui-tree-handle
 																form.form-inline(role='form')
 																	.form-topic
 																		label.sr-only(for='subTopicName') SubTopic name
-																		textarea.form-control(rows='2' cols='60', ng-model='question.newAnswerText', placeholder='Enter answer text to add answer' ng-keyup='$event.keyCode==13 ? addAnswer(question,$event) : null' ng-blur='addAnswer(question,$event)')
+																		textarea.form-control(rows='2' cols='60', ng-model='question.newAnswerText', placeholder='Add an answer' ng-keyup='$event.keyCode==13 ? addAnswer(question,$event) : null' ng-blur='addAnswer(question,$event)')
 											br
 											ol.angular-ui-tree-nodes
 												li.angular-ui-tree-node
@@ -257,7 +261,7 @@ div(ng-controller="createCaseCtrl" style="background-color:#eee;")
 														form.form-inline(role='form')
 															.form-topic
 																label.sr-only(for='questionText' ) Question Text
-																textarea#topicName.form-control(rows='2' cols='100'   placeholder='Enter question text to add new question' ng-model="qa.post.newQuestionText" ng-keyup='$event.keyCode==13 ? addQuestion(qa.post,"post",$event) : null' ng-blur='addQuestion(qa.post,"post",$event)')
+																textarea#topicName.form-control(rows='2' cols='100'   placeholder='Add a question' ng-model="qa.post.newQuestionText" ng-keyup='$event.keyCode==13 ? addQuestion(qa.post,"post",$event) : null' ng-blur='addQuestion(qa.post,"post",$event)')
 									//.row
 										.col-lg-6
 											h3 Data binding
