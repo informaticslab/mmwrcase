@@ -18,9 +18,14 @@
 			.row
 				.col-lg-12
 					p(ng-bind-html='case.additional_information')
+					br
+					br
 			.row
 				.col-lg-12.col-md-12.col-sm-12
 					button.btn.btn-mmwr.btn-lg.pull-right.nav-button(ng-if='!preview' type='button' ui-sref='home' ng-click='rateCase()')
 						| Close Case 
 					button.btn.btn-mmwr.btn-lg.pull-right.nav-button(ng-if='preview' type='button' ng-click='exitCase();')
-						| Close Case 
+						| Close Case
+					button.btn.btn-default.btn-lg.pull-left(style='margin-right:10px;')
+						i.glyphicon.glyphicon-check
+						| Please take this survey!

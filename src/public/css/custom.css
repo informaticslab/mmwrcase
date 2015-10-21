@@ -483,6 +483,10 @@ fieldset[disabled] .btn-mmwr.active {
   background-color: #919ca4;
   color:white;
 }
+.glyphicon.glyphicon-check {
+  font-size:15px;
+  margin-right:10px;
+}
 
 
 a, img {
