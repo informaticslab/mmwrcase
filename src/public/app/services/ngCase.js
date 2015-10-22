@@ -1,4 +1,4 @@
-angular.module('app').factory('ngCase', function($http,dialogs,$window) {
+angular.module('app').factory('ngCase', function($http,dialogs,$window, $state) {
 	return {
 		getCasesByStatus: function(developmentStatus,displayStatus) {
 			return $http.get('/api/mmwrcase/getCasesByStatus/'+developmentStatus+'/'+displayStatus);
