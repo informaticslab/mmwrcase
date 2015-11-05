@@ -227,9 +227,9 @@ $scope.publishCase=function() {
 	else if (isEmpty($scope.case.additional_information)) {
 		ngNotifier.notifyError('Please enter text for additional information');
 	}
-	else if (isEmpty($scope.case.publication_date)) {
-		ngNotifier.notifyError('Please select a publication date');
-	}
+	// else if (isEmpty($scope.case.publication_date)) {
+	// 	ngNotifier.notifyError('Please select a publication date');
+	// }
 	else if ($scope.case.available_cme_credits && number_cme_credits_available == 0 ) {
 		ngNotifier.notifyError('Please enter a valid CME credit');
 	}
