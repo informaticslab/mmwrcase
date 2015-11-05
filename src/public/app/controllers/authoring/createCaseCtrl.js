@@ -192,7 +192,7 @@ $scope.saveDraft = function(originate) {
 				  		      	ngNotifier.notify('case saved successfully');
 				        		if (originate == 'publish')	{
 									$scope.cancel()
-								} else if (originate = 'preview') {
+								} else if (originate == 'preview') {
 				        			var url = $state.href('preview', {caseID: $scope.case.case_id, preview:true});
 									window.open(url,'_blank');
 					        	}

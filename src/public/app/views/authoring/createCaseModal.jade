@@ -95,6 +95,9 @@ div(ng-controller="createCaseCtrl" style="background-color:#eee;")
 									button.btn.btn-primary.pull-right(ng-click="copyQuestion('post','pre')" ng-disabled="qa.post.length == 0") Copy Questions from Post-Test 
 									hr
 									.row
+										|Please select the radio button to specify the correct answer for the question.
+									br
+									.row
 										.col-lg-12(ui-tree='options')
 											ol(ui-tree-nodes='', ng-model='qa.pre', data-type='question')
 												li(ng-repeat="question in qa.pre | filter : byQuestionType('pre') track by $index " , ui-tree-node='')
@@ -116,11 +119,11 @@ div(ng-controller="createCaseCtrl" style="background-color:#eee;")
 																	i.glyphicon.glyphicon-pencil
 																.well(style="background-color:#ffffff;")
 																	.row
-																		//.col-lg-1.col-md-1.col-sm-1.col-xs-2(align='center')
+																		.col-lg-1.col-md-1.col-sm-1.col-xs-1(align='center')
 																			input(type='radio' name='pre_{{question.question.question_id}}' ng-value='1' ng-model='answer.correct' ng-change='setCorrectAnswer(question,answer)')
 																		//.col-lg-10.col-md-10.col.sm-10.col-xs-9
 																			| {{answer.answer}}
-																		.col-lg-12.col-md-12.col.sm-12.col-xs-12
+																		.col-lg-11.col-md-11.col.sm-11.col-xs-11
 																			| {{answer.answer}}
 															.subTopic-title.angular-ui-tree-handle(data-nodrag='', ng-show='answer.editing')
 																label.sr-only(for='subTopicName') SubTopic name
@@ -219,6 +222,9 @@ div(ng-controller="createCaseCtrl" style="background-color:#eee;")
 									button.btn.btn-primary.pull-right(ng-click="copyQuestion('pre','post')" ng-disabled="qa.pre.length == 0") Copy Questions from Pre-Test 
 									hr
 									.row
+										|Please select the radio button to specify the correct answer for the question.
+									br
+									.row
 										.col-lg-12(ui-tree='options')
 											ol(ui-tree-nodes='', ng-model='qa.post', data-type='question')
 												li(ng-repeat="question in qa.post | filter : byQuestionType('post') track by $index " , ui-tree-node='')
@@ -240,9 +246,9 @@ div(ng-controller="createCaseCtrl" style="background-color:#eee;")
 																	i.glyphicon.glyphicon-pencil
 																.well(style="background-color:#ffffff;")
 																	.row
-																		//.col-lg-1.col-md-1.col-sm-1.col-xs-2(align='center')
+																		.col-lg-1.col-md-1.col-sm-1.col-xs-1(align='center')
 																			input(type='radio' name='post_{{question.question.question_id}}' ng-value='1' ng-model='answer.correct'  ng-change='setCorrectAnswer(question,answer)')
-																		.col-lg-12.col-md-12.col.sm-12.col-xs-12
+																		.col-lg-11.col-md-11.col.sm-11.col-xs-11
 																			| {{answer.answer}}
 															.subTopic-title.angular-ui-tree-handle(data-nodrag='', ng-show='answer.editing')
 																label.sr-only(for='subTopicName') SubTopic name
