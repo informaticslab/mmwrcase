@@ -91,12 +91,10 @@ div(ng-controller="createCaseCtrl" style="background-color:#eee;")
 																		//hr(style="color:#dddddd; background-color:#dddddd; height:1px;")
 
 								tab(heading="Pre-Test")
-									|   Pre-Test
+									span(style="font-style: italic;")
+										|Please select the radio button to specify the correct answer for the question.
 									button.btn.btn-primary.pull-right(ng-click="copyQuestion('post','pre')" ng-disabled="qa.post.length == 0") Copy Questions from Post-Test 
 									hr
-									.row
-										|Please select the radio button to specify the correct answer for the question.
-									br
 									.row
 										.col-lg-12(ui-tree='options')
 											ol(ui-tree-nodes='', ng-model='qa.pre', data-type='question')
@@ -111,7 +109,7 @@ div(ng-controller="createCaseCtrl" style="background-color:#eee;")
 														label.sr-only(for='questionText') Question Text
 														textarea.form-control(rows='2' cols='100' , placeholder='Question Text', ng-model='question.question.question' ng-keyup='$event.keyCode==13 ? saveQuestion(question,$event) : null' ng-blur='saveQuestion(question,$event)')
 													ol(ui-tree-nodes='', ng-model='question.answers', data-type='answer')
-														li(ng-repeat='answer in question.answers', ui-tree-node='')
+														li(ng-repeat='answer in question.answers', ui-tree-node='' on)
 															.subTopic-title.angular-ui-tree-handle(ng-show='!answer.editing' ng-mouseenter="hoverSubTopic = true" ng-mouseleave="hoverSubTopic = false")
 																a.del-edit-btn.btn.btn-default.btn-xs.pull-right(ng-show="hoverSubTopic" href='', data-nodrag='', ng-click='removeAnswer(question, answer)')
 																	i.glyphicon.glyphicon-trash
@@ -218,12 +216,10 @@ div(ng-controller="createCaseCtrl" style="background-color:#eee;")
 																						i.glyphicon.glyphicon-pencil
 																		//hr(style="color:#dddddd; background-color:#dddddd; height:1px;")
 								tab(heading="Post-Test")
-									|   Post-Test
+									span(style="font-style: italic;")
+										|Please select the radio button to specify the correct answer for the question.
 									button.btn.btn-primary.pull-right(ng-click="copyQuestion('pre','post')" ng-disabled="qa.pre.length == 0") Copy Questions from Pre-Test 
 									hr
-									.row
-										|Please select the radio button to specify the correct answer for the question.
-									br
 									.row
 										.col-lg-12(ui-tree='options')
 											ol(ui-tree-nodes='', ng-model='qa.post', data-type='question')
