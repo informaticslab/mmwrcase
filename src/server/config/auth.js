@@ -14,3 +14,15 @@ exports.authenticate = function(req, res, next) {
   });
   auth(req, res, next);
 };
+
+
+exports.requiresRole = function(role) {
+  return function (req, res, next) {
+    if(!req.isAuthenticated()) {
+      res.send(403);
+      res.end();
+    } else {
+      next();
+    }
+  }
+};
