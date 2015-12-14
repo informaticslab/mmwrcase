@@ -11,6 +11,7 @@ var properties = require('../lib/envProperties');
 
 module.exports = function(app, config) {
     app.configure(function() {
+        app.use(express.compress());
         app.use(express.static(config.rootPath + '/public'));
         app.set('views', config.rootPath + '/server/views');
         app.set('view engine', 'jade');
@@ -18,8 +19,8 @@ module.exports = function(app, config) {
         //app.use(express.bodyParser());
         app.use(express.bodyParser({uploadDir: config.rootPath+'/public/img'}));
         app.use(session({secret:'use the force',resave:false,saveUninitialized:false}));
-       app.use(passport.initialize());
-       app.use(passport.session());
+        app.use(passport.initialize());
+        app.use(passport.session());
         //app.use(morgan('combined', {stream: accessLogStream}));
         //app.use(morgan('dev')); //LOCAL LOGGING
 
