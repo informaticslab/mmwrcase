@@ -1,0 +1,67 @@
+/* Styles go here */
+
+.btn-blue {
+    color: #fff;
+    background-color: #558699;
+    border-color: #4c7889;
+}
+
+    .btn-blue:hover,
+    .btn-blue:focus,
+    .btn-blue.focus,
+    .btn-blue:active,
+    .btn-blue.active,
+    .open > .dropdown-toggle.btn-blue {
+        color: #fff;
+        background-color: #3b5d6b;
+        border-color: #33505b;
+        z-index:  : 10000;
+    }
+
+    .btn-blue:active,
+    .btn-blue.active,
+    .open > .dropdown-toggle.btn-blue {
+        background-image: none;
+        z-index:  : 10000;
+    }
+
+    .btn-blue.disabled,
+    .btn-blue[disabled],
+    fieldset[disabled] .btn-blue,
+    .btn-blue.disabled:hover,
+    .btn-blue[disabled]:hover,
+    fieldset[disabled] .btn-blue:hover,
+    .btn-blue.disabled:focus,
+    .btn-blue[disabled]:focus,
+    fieldset[disabled] .btn-blue:focus,
+    .btn-blue.disabled.focus,
+    .btn-blue[disabled].focus,
+    fieldset[disabled] .btn-blue.focus,
+    .btn-blue.disabled:active,
+    .btn-blue[disabled]:active,
+    fieldset[disabled] .btn-blue:active,
+    .btn-blue.disabled.active,
+    .btn-blue[disabled].active,
+    fieldset[disabled] .btn-blue.active {
+        background-color: #558699;
+        border-color: #4c7889;
+    }
+
+    .btn-blue .badge {
+        color: #558699;
+        background-color: #fff;
+    }
+    
+     [ta-button] {
+            height: 35px;
+            margin-bottom: 5px;
+        }
+
+  .ta-editor {
+    min-height: 400px;
+    height: auto;
+    overflow: auto;
+    font-family: inherit;
+    font-size: 100%;
+    margin:20px 0;
+ }
