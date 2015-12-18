@@ -3,14 +3,18 @@ var gulp = require('gulp'),
 	minifycss = require('gulp-minify-css'),
 	uglify = require('gulp-uglify'),
 	autoprefixer = require('gulp-autoprefixer'),
+	rename = require('gulp-rename'),
+	notify = require('gulp-notify'),
 	livereload = require('gulp-livereload');
 
 gulp.task('styles', function() {
-	return sass('public/scss/*.scss', {style:'expanded'})
-	.pipe(autoprefixer('last 2 versions'))
+	return gulp.src('public/custom_css/*.css')
 	.pipe(gulp.dest('public/css'))
 	.pipe(rename({suffix:'.min'}))
 	.pipe(minifycss())
 	.pipe(gulp.dest('public/css'))
-	.pipe(notify({message: 'Styles task complete'}));
+});
+
+gulp.task('default', function() {
+	gulp.start('styles');
 });
