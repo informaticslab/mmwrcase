@@ -21,7 +21,7 @@
 			button.btn.btn-mmwr(type='button' ui-sref='overview({caseID:currentCase.case_id})') Begin Case
 		.col-lg-3.col-md-4.col-sm-4.col-xs-4
 			//img.img-thumbnail(src='img/influenza.jpg')
-			img.img-thumbnail(src='{{featuredImageUrl}}')
+			img.img-thumbnail(src='{{featuredImageUrl}}' ng-show = 'currentCase.images.length > 0')
 	.row
 		.col-lg-12.col-md-12.col-sm-12.people-liked
 			span.people-liked-text Other highly rated cases...
@@ -29,6 +29,7 @@
 				div(ng-repeat='case in topCases')
 					span.teaser-title
 						a(ui-sref='overview({caseID:case.case_id})') {{case.title}}&nbsp;
+						br
 						rating(ng-model='case.rating' max ='max' readOnly='isReadOnly' on-hover='hoveringOver(value)' on-leave='overStar = null')
 					br
 					span.teaser-date {{case.publication_date | date}}

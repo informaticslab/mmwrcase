@@ -10,6 +10,7 @@
 					.col-lg-7.col-md-8.col-sm-8.col-xs-8
 						span.teaser-title
 							a(ui-sref='overview({caseID:case.case_id})') {{case.title}}&nbsp;
+						br
 						rating(ng-model='case.rating' max ='max' readOnly='isReadOnly' on-hover='hoveringOver(value)' on-leave='overStar = null')
 						br
 						span.teaser-date {{case.publication_date | date}}
