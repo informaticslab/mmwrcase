@@ -21,7 +21,7 @@
 			button.btn.btn-mmwr(type='button' ui-sref='overview({caseID:currentCase.case_id})') Begin Case
 		.col-lg-3.col-md-4.col-sm-4.col-xs-4
 			//img.img-thumbnail(src='img/influenza.jpg')
-			img.img-thumbnail(src='{{featuredImageUrl}}' ng-show = 'currentCase.images.length > 0')
+			img.img-thumbnail(src='{{featuredImageUrl}}' ng-show = 'featuredImageUrl != "" && featuredImageUrl != undefined ')
 	.row
 		.col-lg-12.col-md-12.col-sm-12.people-liked
 			span.people-liked-text Other highly rated cases...
