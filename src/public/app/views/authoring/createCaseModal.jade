@@ -305,16 +305,16 @@ div(ng-controller="createCaseCtrl" style="background-color:#eee;")
 											select.form-control(placeholder='Select a publish location' ng-model='case.display_status' ng-options='displayStatus.display_status_id as displayStatus.description for displayStatus in displayStatuses' )
 												option(value='-1') - Select Publish Location  -
 										br
-										//- label Scheduled Publish Date:
-										//- 	.dropdown(style="position:relative; z-index:1")
-										//- 		a#dropdown1.dropdown-toggle(role='button', data-toggle='dropdown', data-target='#', href='')
-										//- 			.input-group
-										//- 				div.form-control(type='text')
-										//- 					| {{case.publication_date | date:'MMM d, yyyy'}}
-										//- 				span.input-group-addon
-										//- 					i.glyphicon.glyphicon-calendar
-										//- 		ul.dropdown-menu(role='menu', aria-labelledby='dLabel')
-										//- 			datetimepicker(data-on-set-time="publicationDateChanged(newDate, oldDate)" data-ng-model='case.publication_date', data-datetimepicker-config="{ dropdownSelector: '#dropdown1',startView:'day', minView:'day' }")
+										label(ng-show='case.display_status == 1') Scheduled Publish Date:
+											.dropdown(style="position:relative; z-index:1")
+												a#dropdown1.dropdown-toggle(role='button', data-toggle='dropdown', data-target='#', href='')
+													.input-group
+														div.form-control(type='text')
+															| {{case.publication_date | date:'MMM d, yyyy'}}
+														span.input-group-addon
+															i.glyphicon.glyphicon-calendar
+												ul.dropdown-menu(role='menu', aria-labelledby='dLabel')
+													datetimepicker(data-on-set-time="publicationDateChanged(newDate, oldDate)" data-ng-model='case.publication_date', data-datetimepicker-config="{ dropdownSelector: '#dropdown1',startView:'day', minView:'day' }")
 									//- br
 									//- .create-btn-cont
 									//- 	button.btn.btn-success(type="button" ng-click="publishCase()")
