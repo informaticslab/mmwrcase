@@ -20,7 +20,7 @@
 						.row
 							.col-md-3.col-xs-6.thumb(ng-repeat= 'image in case.images')
 								.thumbnail
-									a(ng-click='openModal("lg",image)')
+									a(ng-click='openModal("lg",image,case.images.length)')
 										img#imageresource.img-responsive(src='{{image.image_url}}')
 									//h4.thumbnail-fig Figure {{image.sequence_id}}
 									h4.thumbnail-title {{image.title}}

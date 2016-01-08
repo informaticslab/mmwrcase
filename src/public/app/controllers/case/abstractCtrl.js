@@ -15,7 +15,7 @@ angular.module('app').controller('abstractCtrl', function($scope,$stateParams, n
 	//MODAL
 	$scope.animationsEnabled = true;
 
-	$scope.openModal = function(size,image) {
+	$scope.openModal = function(size,image,imagesCount) {
 
 		var modalInstance = $modal.open({
 			animation: $scope.animationsEnabled,
@@ -25,6 +25,9 @@ angular.module('app').controller('abstractCtrl', function($scope,$stateParams, n
 			resolve: {
 				image: function() {
 					return image;
+				},
+				imagesCount : function() { 
+					return imagesCount;
 				}
 			}
 		});

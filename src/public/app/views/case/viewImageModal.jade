@@ -3,7 +3,7 @@ body
 		.modal-header
 			button.close(type='button' ng-click='cancel()')
 				.fa.fa-times
-			h4.thumbnail-fig.modal-title Figure {{image.sequence_id}}
+			h4.thumbnail-fig.modal-title Image {{image.sequence_id}} of {{imagesCount}} 
 		.modal-body
 			img.img-responsive.center(src='{{image.image_url}}')
 		.modal-footer
