@@ -245,9 +245,9 @@ $scope.publishCase=function() {
 	else if (!validQA($scope.qa.post)) {
 		ngNotifier.notifyError('Please enter some post-test question and a minimum of ' + $scope.minAnsRequired + ' answers and select a correct answer');
 	}
-	else if ($scope.images.length == 0) {
-		ngNotifier.notifyError('Please enter at least 1 image for the case');
-	}
+	// else if ($scope.images.length == 0) {
+	// 	ngNotifier.notifyError('Please enter at least 1 image for the case');
+	// }
 	else if ($scope.case.display_status < 0 ) {
 		ngNotifier.notifyError('Please select a valid publish location');
 	}
