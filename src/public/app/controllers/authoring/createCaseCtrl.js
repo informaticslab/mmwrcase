@@ -238,13 +238,13 @@ $scope.publishCase=function() {
 	// else if (isEmpty($scope.case.publication_date)) {
 	// 	ngNotifier.notifyError('Please select a publication date');
 	// }
-	else if ($scope.case.available_cme_credits && number_cme_credits_available == 0 ) {
+	else if ($scope.case.available_cme_credits && $scope.case.number_cme_credits_available == 0 ) {
 		ngNotifier.notifyError('Please enter a valid CME credit');
 	}
-	else if ($scope.case.available_cme_credits && cme_release_date == null ) {
+	else if ($scope.case.available_cme_credits && $scope.case.cme_release_date == null ) {
 		ngNotifier.notifyError('Please enter a valid CME release date');
 	}
-	else if ($scope.case.available_cme_credits && cme_valid_until == null ) {
+	else if ($scope.case.available_cme_credits && $scope.case.cme_valid_until == null ) {
 		ngNotifier.notifyError('Please enter a valid CME expiration date');
 	}
 	else if (!validQA($scope.qa.pre)) {
