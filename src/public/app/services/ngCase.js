@@ -36,6 +36,9 @@ angular.module('app').factory('ngCase', function($http,dialogs,$window, $state) 
 		getDraftCases : function() {
 			return $http.get('/api/mmwrcase/getDraftCases');
 		},
+		getRating : function(caseId) {
+			return $http.get('api/mmwrcase/getRating/'+caseId);
+		},
 		exitMode : function(preview) {
 			if (preview) {
 				var dlg = dialogs.confirm('Confirm Close','Please confirm that you are done with previewing the case');

@@ -7,7 +7,7 @@ exports.getCasesByStatus = function(req,res) {
 	//var sqlStm = 'SELECT * FROM case_main where development_status = ? and display_status = ?',[devStatus,displayStatus];
 	//console.log(sqlStm)
 	if(true){
-		db.query('SELECT * FROM case_main where development_status = ? and display_status = ?',[devStatus,displayStatus],function(err,rows){
+		db.query('SELECT a.*,(rating_1 + rating_2+ rating_3 + rating_4 + rating_5) as rated_count FROM case_main a, rating b where development_status = ? and display_status = ? and a.case_id = b.case_id',[devStatus,displayStatus],function(err,rows){
   		if(err) {
   			res.send(err);
   		} 
@@ -30,7 +30,7 @@ exports.getCurrentCase = function(req,res) {
 	//connection.connect();
 	var caseData = {}
 	if(true){
-		db.query('SELECT * FROM case_main where development_status = 5 and display_status = 0 ',function(err,rows){
+		db.query('SELECT a.*,(rating_1 + rating_2+ rating_3 + rating_4 + rating_5) as rated_count FROM case_main a, rating b where development_status = 5 and display_status = 0 and a.case_id = b.case_id',function(err,rows){
   		if(err) {
   			res.send(err);
   		} 
@@ -622,7 +622,8 @@ exports.checkCaseExist = function(req,res) {
 
 exports.getRating = function(req,res) {
   	var case_id = req.params.caseId;
-  	db.query('select case_id, ROUND(((rating_1 + rating_2+ rating_3 + rating_4 + rating_5) / 5),0)  as rated from rating where case_ID = ?',[case_id],function(err,result){
+  	console.log('back ',case_id);
+  	db.query('select case_id, ROUND(((rating_1 + rating_2+ rating_3 + rating_4 + rating_5) / 5),0)  as rated, (rating_1 + rating_2+ rating_3 + rating_4 + rating_5) as rated_count from rating where case_id = ?',[case_id],function(err,result){
   		if (err) {
 				res.send(err);
 		}
@@ -708,12 +709,14 @@ exports.getDisplayStatus = function(req,res) {
 
 exports.getTopRatedCases = function(req,res) {
 	var numberToGet = req.params.numberToGet; 
-	var sqlStr =  'select case_id, title, publication_date, tag_line, rating from case_main order by rating DESC limit ' + numberToGet
+	//var sqlStr =  'select case_id, title, publication_date, tag_line, rating from case_main order by rating DESC limit ' + numberToGet
+	var sqlStr =  'select a.case_id, title, publication_date, tag_line, a.rating ,(rating_1 + rating_2+ rating_3 + rating_4 + rating_5) as rated_count from case_main a,rating b where a.case_id = b.case_id order by rating DESC limit '+ numberToGet
 	db.query(sqlStr, function(err,result){
 		if (err) {
 		res.send(err);
 		}
 		else {
+
 		res.send(result);
 		}
 	})

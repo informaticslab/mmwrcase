@@ -19,6 +19,14 @@ angular.module('app').controller('currentCaseCtrl', function($scope, ngCase) {
 						$scope.featuredImageUrl = $scope.currentCase.images[i].image_url;
 					}
 				}
+				// ngCase.getRating($scope.currentCase.case_id)
+				// .success(function(ratingData) {
+				// 	//console.log('rating data ',ratingData);
+				// 	$scope.currentCase['ratedCount'] = ratingData[0].rated_count;
+				// })
+				// .error(function(err1) {
+				// 	console.log('rating not available');
+				// })
 			})
 			.error(function(err) {
 				console.log('Case data unvailable');
