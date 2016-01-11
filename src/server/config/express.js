@@ -13,11 +13,12 @@ module.exports = function(app, config) {
     app.configure(function() {
         app.use(express.compress());
         app.use(express.static(config.rootPath + '/public'));
+        app.use(express.static('/'))
         app.set('views', config.rootPath + '/server/views');
         app.set('view engine', 'jade');
         app.use(cookieParser());
         //app.use(express.bodyParser());
-        app.use(express.bodyParser({uploadDir: config.rootPath+'/public/img'}));
+        app.use(express.bodyParser({uploadDir: config.imagePath}));
         app.use(session({secret:'use the force',resave:false,saveUninitialized:false}));
         app.use(passport.initialize());
         app.use(passport.session());
