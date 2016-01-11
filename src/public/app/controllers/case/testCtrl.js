@@ -5,7 +5,7 @@ angular.module('app').controller('testCtrl', function($scope, ngTest, ngCase, $s
 	
 	ngTest.getQuestions($stateParams.caseID, $stateParams.testType).then(function(data) {
 		$scope.questions = data;
-		console.log($scope.questions);
+		//console.log($scope.questions);
 	});
 	
 	ngCase.getCaseById($stateParams.caseID).success(function(caseData){
