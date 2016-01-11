@@ -3,7 +3,7 @@ angular.module('app').controller('createCaseCtrl', function ($scope,$http,$windo
 $scope.developmentStatuses;
 $scope.displayStatuses;
 $scope.galleryStatus = {'open':false};
-$scope.minAnsRequired = 4;
+$scope.minAnsRequired = 2;
 
 getDisplayStatus();
 getDevStatus();
@@ -70,7 +70,15 @@ $scope.saveDraft = function(originate) {
 		$scope.case.last_edited = now;
 		// build overview text
 		if ($scope.case.development_status == 5) {
-				$scope.case.publication_date = now;
+			 if ($scope.case.display_status != 1) {
+				$scope.case.publication_date = now;  // overriding publication date to current date if not publishing to up-coming case
+			 }
+			 else {
+			 	if ($scope.case.publication_date == null){ // user selected to publish to upcoming case but did not select a date, default to the current date
+			 		$scope.case.publication_date = now; 
+			 	}
+			 }
+
 		}
 		$scope.case.overview = $scope.case.case_text.replace(/<\/?[^>]+>/gi, '').substring(0,400) + '...';
 		
@@ -254,15 +262,16 @@ $scope.publishCase=function() {
 	else {
 		// set publication date to current date
 		if ($scope.case.display_status == 1)  {  // future case,  make sure publication date is in the future
-			var d1 = new Date($scope.case.publication_date);
-			var curDate = new Date();
-			if (d1 <= curDate ) {
-				ngNotifier.notifyError('You are publishing an upcoming case, Please select a future publication date.');
+
+			// var d1 = new Date($scope.case.publication_date);
+			// var curDate = new Date();
+			// if (d1 <= curDate ) {
+			// 	ngNotifier.notifyError('You are publishing an upcoming case, Please select a future publication date.');
 						
-			}
-			else  {
+			// }
+			// else  {
 				$scope.saveDraft('publish');
-			}
+			// }
 		}
 		// checking for conflicting status
 		// if (!validStatus($scope.case.development_status,$scope.case.display_status)) {
