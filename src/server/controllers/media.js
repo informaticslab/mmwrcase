@@ -39,7 +39,8 @@ exports.getFile = function(req,res) {
 exports.deleteFile = function(req,res) {
 	var case_id = req.body.case_id;
 	var image_url = req.body.image_url;
-	var filePath = config.rootPath+'/public/'+image_url;
+	//var filePath = config.rootPath+'/public/'+image_url;
+	var filePath = image_url;
 	if (case_id) { 
 		db.query('delete from image where case_id = ? and image_url = ?',[case_id,image_url],function(err,result){
 					if (err) {
