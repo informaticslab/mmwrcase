@@ -2,7 +2,7 @@ angular.module('app').controller('currentCaseCtrl', function($scope, ngCase) {
 	//ratings
 	$scope.max = 5;
 	$scope.isReadOnly = true;
-	$scope.numberTopCases = 3;
+	$scope.numberTopCases = 2;
 
 	$scope.hoveringOver = function(value) {
 		$scope.overStar = value;

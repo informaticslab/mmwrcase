@@ -710,7 +710,7 @@ exports.getDisplayStatus = function(req,res) {
 exports.getTopRatedCases = function(req,res) {
 	var numberToGet = req.params.numberToGet; 
 	//var sqlStr =  'select case_id, title, publication_date, tag_line, rating from case_main order by rating DESC limit ' + numberToGet
-	var sqlStr =  'select a.case_id, title, publication_date, tag_line, a.rating ,(rating_1 + rating_2+ rating_3 + rating_4 + rating_5) as rated_count from case_main a,rating b where a.case_id = b.case_id order by rating DESC limit '+ numberToGet
+	var sqlStr =  'select a.case_id, title, publication_date, tag_line, a.rating ,(rating_1 + rating_2+ rating_3 + rating_4 + rating_5) as rated_count from case_main a,rating b where a.case_id = b.case_id and (a.display_status = 2) and a.rating > 2 order by rating DESC limit '+ numberToGet
 	db.query(sqlStr, function(err,result){
 		if (err) {
 		res.send(err);
