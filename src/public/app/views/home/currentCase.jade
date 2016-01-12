@@ -3,7 +3,7 @@
 		.col-lg-8.col-md-6.col-sm-6.col-xs-6
 			h4 Current Case
 		.col-lg-4.col-md-6.col-sm-6.col-xs-6.rating-sty
-			rating(ng-model='currentCase.rating' max ='max' readOnly='isReadOnly' on-hover='hoveringOver(value)' on-leave='overStar = null') 
+			rating.rating-no-pointer(ng-model='currentCase.rating' max ='max' readOnly='isReadOnly' on-hover='hoveringOver(value)' on-leave='overStar = null') 
 			| ({{currentCase.rated_count}})
 	.row
 		.col-lg-12.col-md-12.col-sm-12
@@ -31,7 +31,7 @@
 					span.teaser-title
 						a(ui-sref='overview({caseID:case.case_id})') {{case.title}}&nbsp;
 						br
-						rating(ng-model='case.rating' max ='max' readOnly='isReadOnly' on-hover='hoveringOver(value)' on-leave='overStar = null')
+						rating.rating-no-pointer(ng-model='case.rating' max ='max' readOnly='isReadOnly' on-hover='hoveringOver(value)' on-leave='overStar = null')
 						| ({{case.rated_count}})
 					br
 					span.teaser-date {{case.publication_date | date}}
