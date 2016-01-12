@@ -11,7 +11,7 @@
 						span.teaser-title
 							a(ui-sref='overview({caseID:case.case_id})') {{case.title}}&nbsp;
 						br
-						rating(ng-model='case.rating' max ='max' readOnly='isReadOnly' on-hover='hoveringOver(value)' on-leave='overStar = null')
+						rating.rating-pointer(ng-model='case.rating' max ='max' readOnly='isReadOnly' on-hover='hoveringOver(value)' on-leave='overStar = null')
 						| ({{case.rated_count}})
 						br
 						span.teaser-date {{case.publication_date | date}}

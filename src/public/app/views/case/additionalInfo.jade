@@ -11,7 +11,7 @@
 					span.title-case {{case.title}}
 				.col-lg-4.col-md-6.col-sm-6.col-xs-6.rating-sty(ng-show='!preview')
 					p Rate this case
-					rating(ng-model='caseRating' max ='max' readOnly='isReadOnly' on-hover='hoveringOver(value)' on-leave='overStar = null')
+					rating.rating-pointer(ng-model='caseRating' max ='max' readOnly='isReadOnly' on-hover='hoveringOver(value)' on-leave='overStar = null')
 			.row
 				.col-lg-12.col-md-12.col-sm-12
 					hr.line-margin

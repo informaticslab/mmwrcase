@@ -131,6 +131,11 @@ fieldset[disabled] .btn-mmwr.active {
   padding:15px 25px 25px 25px;
 
 }
+
+.rating-pointer {
+  cursor: pointer;
+}
+
 .rating-sty {
   margin-top:10px;
   text-align:right;
