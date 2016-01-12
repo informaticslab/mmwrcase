@@ -306,7 +306,7 @@ div(ng-controller="createCaseCtrl" style="background-color:#eee;")
 												option(value='-1') - Select Publish Location  -
 										br
 										label(ng-show='case.display_status == 1') Scheduled Publish Date:
-											.dropdown(style="position:relative; z-index:1")
+											.dropdown(style="position:relative; z-index:1000")
 												a#dropdown1.dropdown-toggle(role='button', data-toggle='dropdown', data-target='#', href='')
 													.input-group
 														div.form-control(type='text')
@@ -314,7 +314,7 @@ div(ng-controller="createCaseCtrl" style="background-color:#eee;")
 														span.input-group-addon
 															i.glyphicon.glyphicon-calendar
 												ul.dropdown-menu(role='menu', aria-labelledby='dLabel')
-													datetimepicker(data-on-set-time="publicationDateChanged(newDate, oldDate)" data-ng-model='case.publication_date', data-datetimepicker-config="{ dropdownSelector: '#dropdown1',startView:'day', minView:'day' }")
+													datetimepicker(data-on-set-time="publicationDateChanged(newDate, oldDate)" data-ng-model='case.publication_date', data-datetimepicker-config="{ dropdownSelector: '#dropdown1',startView:'day', minView:'day' }" style='poistion:absolute')
 									//- br
 									//- .create-btn-cont
 									//- 	button.btn.btn-success(type="button" ng-click="publishCase()")
@@ -340,7 +340,7 @@ div(ng-controller="createCaseCtrl" style="background-color:#eee;")
 										input(type="number" max = '5' min = '1' ng-model = 'case.number_cme_credits_available' ng-disabled = 'case_available_cme_credits==0')
 									br
 									label Release Date:
-										.dropdown
+										.dropdown(style="position:relative; z-index:900")
 											a#dropdown2.dropdown-toggle(role='button', data-toggle='dropdown', data-target='#', href='')
 												.input-group
 													div.form-control(type='text')
@@ -351,7 +351,7 @@ div(ng-controller="createCaseCtrl" style="background-color:#eee;")
 												datetimepicker(data-on-set-time="cmeReleaseChanged(newDate, oldDate)" data-ng-model='case.cme_release_date', data-datetimepicker-config="{ dropdownSelector: '#dropdown2',startView:'day', minView:'day' }")
 									br
 									label Expiration Date: 
-										.dropdown
+										.dropdown(style="position:relative; z-index:101")
 											a#dropdown3.dropdown-toggle(role='button', data-toggle='dropdown', data-target='#', href='')
 												.input-group
 													div.form-control(type='text')

@@ -312,6 +312,12 @@ textarea{
   vertical-align: middle;
 }
 
+.form-control {
+    display: inline-block;
+    width: 100% !important;
+    vertical-align: middle;
+}
+
 .angular-ui-tree-empty {
   border: 0px dashed #bbb;
   min-height: 0px;
