@@ -136,6 +136,10 @@ fieldset[disabled] .btn-mmwr.active {
   cursor: pointer;
 }
 
+.rating-no-pointer {
+  cursor: not-allowed;
+}
+
 .rating-sty {
   margin-top:10px;
   text-align:right;
