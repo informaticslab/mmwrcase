@@ -307,7 +307,7 @@ div(ng-controller="createCaseCtrl" style="background-color:#eee;")
 										br
 										label(ng-show='case.display_status == 1') Scheduled Publish Date:
 											.dropdown(style="position:relative; z-index:1000")
-												a#dropdown1.dropdown-toggle(role='button', data-toggle='dropdown', data-target='#', href='')
+												a#dropdown1(role='button', data-toggle='dropdown', data-target='#', href='')
 													.input-group
 														div.form-control(type='text')
 															| {{case.publication_date | date:'MMM d, yyyy'}}
@@ -341,7 +341,7 @@ div(ng-controller="createCaseCtrl" style="background-color:#eee;")
 									br
 									label Release Date:
 										.dropdown(style="position:relative; z-index:900")
-											a#dropdown2.dropdown-toggle(role='button', data-toggle='dropdown', data-target='#', href='')
+											a#dropdown2(role='button', data-toggle='dropdown', data-target='#', href='')
 												.input-group
 													div.form-control(type='text')
 														| {{case.cme_release_date | date:'MMM d, yyyy'}}
@@ -352,7 +352,7 @@ div(ng-controller="createCaseCtrl" style="background-color:#eee;")
 									br
 									label Expiration Date: 
 										.dropdown(style="position:relative; z-index:101")
-											a#dropdown3.dropdown-toggle(role='button', data-toggle='dropdown', data-target='#', href='')
+											a#dropdown3(role='button', data-toggle='dropdown', data-target='#', href='')
 												.input-group
 													div.form-control(type='text')
 														| {{case.cme_valid_until | date:'MMM d, yyyy'}}
