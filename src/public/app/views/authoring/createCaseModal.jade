@@ -93,7 +93,7 @@ div(ng-controller="createCaseCtrl" style="background-color:#eee;")
 								tab(heading="Pre-Test")
 									span(style="font-style: italic;")
 										|Please select the radio button to specify the correct answer for the question.
-									button.btn.btn-primary.pull-right(ng-click="copyQuestion('post','pre')" ng-disabled="qa.post.length == 0") Copy Questions from Post-Test 
+									//button.btn.btn-primary.pull-right(ng-click="copyQuestion('post','pre')" ng-disabled="qa.post.length == 0") Copy Questions from Post-Test 
 									hr
 									.row
 										.col-lg-12(ui-tree='options')
@@ -218,8 +218,11 @@ div(ng-controller="createCaseCtrl" style="background-color:#eee;")
 								tab(heading="Post-Test")
 									span(style="font-style: italic;")
 										|Please select the radio button to specify the correct answer for the question.
-									button.btn.btn-primary.pull-right(ng-click="copyQuestion('pre','post')" ng-disabled="qa.pre.length == 0") Copy Questions from Pre-Test 
 									hr
+									.row
+										.col-lg-2
+											button.btn.btn-primary.pull-left(ng-click="copyQuestion('pre','post')" ng-disabled="qa.pre.length ==0  || qa.post.length != 0") Copy Questions from Pre-Test
+									br
 									.row
 										.col-lg-12(ui-tree='options')
 											ol(ui-tree-nodes='', ng-model='qa.post', data-type='question')
