@@ -721,7 +721,7 @@ $scope.previewCase = function() {
 }
 
 $scope.confirmCancel = function() {
-		var dlg = dialogs.confirm('Confirmn Close Edit', 'Please save your changes before exit.  Click yes to continue');
+		var dlg = dialogs.confirm('Confirmn Close Edit', 'Please make sure to save your changes before exit.  Click YES to continue to exit. Click NO to return to edit.');
 		dlg.result.then(function(btn){
 			$scope.cancel()
 		}, function(btn){
