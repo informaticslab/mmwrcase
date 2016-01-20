@@ -1,0 +1,11 @@
+body
+	.modal-header
+		button.close(type='button' ng-click='cancel()')
+			.fa.fa-times
+		h4.modal-title Case Not Found
+	.modal-body
+		p The case you have selected does not exist in the system.  Please select another case. Click OK to return to home page.
+		br
+	.modal-footer
+		button.btn.btn-mmwr.pull-right(type='button' ng-click='ok()') OK
+		

@@ -184,26 +184,31 @@ exports.getCaseById = function(req,res) {
   		} 
   		else { 
   				//console.log(resultSets);
-  				caseData = resultSets[0,0][0];
-  				caseData['images'] = resultSets[0,1];
-  				caseData['QA'] = [];
-  				var questions = resultSets[0,2];
-  				var answers = resultSets[0,3];
-  			//	console.log('questions ',questions);
-  				for(var i = 0; i < questions.length; i ++){
-  				//	console.log(questions[i]);
-  					var oneQA = {'question': questions[i],'answers':[]};
-  					for (j=0; j < answers.length; j++){
-  						if (answers[j].question_id == questions[i].question_id) {
-  							delete answers[j].case_id;
-  							delete answers[j].question_id;
-  							oneQA.answers.push(answers[j])
-  						}
-  					}
-  					caseData['QA'].push(oneQA);
+	  			if (resultSets[0,0].length > 0) {
+	  				caseData = resultSets[0,0][0];
+	  				caseData['images'] = resultSets[0,1];
+	  				caseData['QA'] = [];
+	  				var questions = resultSets[0,2];
+	  				var answers = resultSets[0,3];
+	  			//	console.log('questions ',questions);
+	  				for(var i = 0; i < questions.length; i ++){
+	  				//	console.log(questions[i]);
+	  					var oneQA = {'question': questions[i],'answers':[]};
+	  					for (j=0; j < answers.length; j++){
+	  						if (answers[j].question_id == questions[i].question_id) {
+	  							delete answers[j].case_id;
+	  							delete answers[j].question_id;
+	  							oneQA.answers.push(answers[j])
+	  						}
+	  					}
+	  					caseData['QA'].push(oneQA);
+	  				}
+	  				//casData['QA'] = 
+	  				res.send(caseData);
   				}
-  				//casData['QA'] = 
-  				res.send(caseData);
+  				else {
+  					res.send({error:'case not found'})
+  				}
 	  	 	}
 		});
 }
