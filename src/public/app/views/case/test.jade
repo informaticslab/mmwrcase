@@ -22,8 +22,11 @@
 								label
 									input(type='radio' name='answer' value='{{answers.answer_id}}' ng-model='questions.selectedAnswer')
 							.col-lg-11.col-md-11.col-sm-11.col-xs-10
-								{{answers.answer}}
+								|{{answers.answer}}
 					br
 					.row
 						.col-lg-12.col-md-12.col-sm-12(align='center')
+							button.btn.btn-mmwr.btn-lg.pull-left(type='button' ui-sref='abstract({caseID:case.case_id})' ng-show='questions.question.post_pre == "post"') 
+								| Review Abstract
 							button.btn.btn-mmwr.btn-lg.nav-button(type='button' ng-click='checkAnswer()' ng-disabled='!questions.selectedAnswer') Submit
+
