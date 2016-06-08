@@ -53,6 +53,8 @@ module.exports = function(app) {
   app.post('/api/mmwrcase/testReformatted', mmwrCase.testReformatted);
   app.post('/api/mmwrcase/saveImages', mmwrCase.saveImages);
 
+// registration
+  app.post('/api/mmwrcase/createLogin', mmwrCase.createLogin)
 
   app.get('/partials/*', function(req, res) {
     res.render('../../public/app/views/' + req.params);

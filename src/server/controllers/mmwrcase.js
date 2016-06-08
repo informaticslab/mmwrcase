@@ -435,6 +435,18 @@ exports.updateQuestion = function(req,res) {
 	})
 }
 
+exports.createLogin = function(req,res) {
+	var data = req.body;
+	db.query('insert into user set ?',[data],function(err,insertResult){
+		if (err) {
+			res.send(err);
+		}
+		else {
+			res.send('Registration Success');
+		}
+	})
+}
+
 function updateQuestion(question) {
 	var case_id = question.case_id;
 	var question_id = question.question_id;
