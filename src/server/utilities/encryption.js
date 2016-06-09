@@ -1,9 +1,23 @@
-var bcrypt = require('bcrypt');
+////var bcrypt = require('bcrypt');
+//
+//exports.createSalt = function() {
+//	return bcrypt.genSalt(10);
+//}
+//
+//
+//exports.hashPwd = function(pwd,salt) {
+//	var hash = bcrypt.hashSync(pwd, salt);
+//	return hash
+//}
 
-exports.hashPwd = function(pwd) {
-  bcrypt.genSalt(10, function(err, salt) {
-  	bcrypt.hash(pwd,salt,function(err,has) {
-  		return hash;
-  	});
-  });
+
+var crypto = require('crypto');
+
+exports.createSalt = function() {
+	return crypto.randomBytes(128).toString('base64');
+}
+
+exports.hashPwd = function(salt, pwd) {
+	var hmac = crypto.createHmac('sha1', salt);
+	return hmac.update(pwd).digest('hex');
 }

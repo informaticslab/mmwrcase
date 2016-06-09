@@ -1,3 +1,4 @@
+encrypt = require('../utilities/encryption');
 var db = require('../lib/dbConnection');
 
 exports.getCasesByStatus = function(req,res) {
@@ -438,30 +439,25 @@ exports.updateQuestion = function(req,res) {
 exports.createLogin = function(req,res) {
 	var userData = req.body;
 	userData.display_name = userData.first_name + " " + userData.last_name;
-	userData.salt = createSalt();
-	userData.hash_password = hashPwd(userData.salt, userData.password);
+	userData.salt = encrypt.createSalt();
+	//userData.hash_password = encrypt.hashPwd(userData.salt,userData.password);
+	userData.hash_password = userData.password;
 	userData.last_login = null;
 	userData.enabled = 0;
 	userData.token = null;
+	userData.type = 'user',
+	userData.med_school = null
+	delete userData.password;  // remove un-needed field
 	db.query('insert into user set ?',[userData],function(err,insertResult){
 		if (err) {
+			console.log(err);
 			res.send(err);
 		}
 		else {
-			res.send('Registration Success');
+			res.send({'success':true});
 		}
 	})
 }
-
-function createSalt(){
-	return crypto.randomBytes(128).toString('base64');
-};
-
-function hashPwd(salt,pwd) {
-	var hmac = crypto.createHmac('sha1', salt);
-	return hmac.update(pwd).digest('hex');
-};
-
 
 
 function updateQuestion(question) {

@@ -56,18 +56,14 @@ angular.module('app').controller('loginCtrl',function($scope,$http,ngIdentity,ng
 			email: $scope.email,
 			password: $scope.password,
 			first_name: $scope.firstName,
-			last_name: $scope.lastName,
-			type : 'user',
-			med_school : $scope.medSchool,
+			last_name: $scope.lastName
 		};
-		
 		$http.post('/api/mmwrcase/createLogin',newUserData).then(function(res){
-			if(res.data) {
-				//
-				console.log('create login result ',res.data);
+			if(res.data.success) {
+				$scope.ok();
 			}
 			else {
-				alert('Registrattion failed');
+				ngNotifier.notifyError('Registrattion not success, please contact site Administrator for assistance');
 			}
 		});
 	}
