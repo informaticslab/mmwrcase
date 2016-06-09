@@ -436,8 +436,14 @@ exports.updateQuestion = function(req,res) {
 }
 
 exports.createLogin = function(req,res) {
-	var data = req.body;
-	db.query('insert into user set ?',[data],function(err,insertResult){
+	var userData = req.body;
+	userData.display_name = userData.first_name + " " + userData.last_name;
+	userData.salt = createSalt();
+	userData.hash_password = hashPwd(userData.salt, userData.password);
+	userData.last_login = null;
+	userData.enabled = 0;
+	userData.token = null;
+	db.query('insert into user set ?',[userData],function(err,insertResult){
 		if (err) {
 			res.send(err);
 		}
@@ -446,6 +452,17 @@ exports.createLogin = function(req,res) {
 		}
 	})
 }
+
+function createSalt(){
+	return crypto.randomBytes(128).toString('base64');
+};
+
+function hashPwd(salt,pwd) {
+	var hmac = crypto.createHmac('sha1', salt);
+	return hmac.update(pwd).digest('hex');
+};
+
+
 
 function updateQuestion(question) {
 	var case_id = question.case_id;
