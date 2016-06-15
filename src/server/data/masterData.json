@@ -1,0 +1,6 @@
+{
+  "yearsOfPractice" : {"min":1,"max":30},
+  "professions"      : ["Student","Physician","Nurse","Pharmacist","Researcher"],
+  "specialties" : ["Medicine","Surgery","Ob-Gyn","Pediatrics","Psychiatry","Public Health"],
+  "patientCareHours" : {"min":0, "max":40}
+}

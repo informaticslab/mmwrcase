@@ -1,7 +1,7 @@
 angular.module('app').controller('createCaseModalCtrl', function ($scope, $modal, $modalInstance,ngCase,displayStatus,developmentStatus) {
 
 $scope.developmentStatus = developmentStatus;
-$scope.displayStatus; = displayStatus
+$scope.displayStatus = displayStatus;
 
 $scope.case = {
 	"case_id"	: null,

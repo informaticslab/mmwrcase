@@ -1,4 +1,4 @@
-var passport = require('passport'),
+var passport = require('passport'), bcrypt= require('bcrypt')
   LocalStrategy = require('passport-local').Strategy;
 var db = require('../lib/dbConnection');
 
@@ -10,9 +10,12 @@ module.exports = function() {
     function(email, password, done) {
       db.query('select * from user where email = "' + email + '"' , function(err, rows) {
         //console.log(rows);
-        if(rows[0]  && password === rows[0].hash_password) {
+        //if(rows[0]  && password === rows[0].hash_password) {
+        //var myhashed = encrypt.hashPwd(rows[0].salt,password);
+        if(rows[0]  && bcrypt.compareSync(password,rows[0].hash_password)) {
           return done(null, rows[0]);
-        } else {
+        }
+        else {
           return done(null,false);
         }
       });

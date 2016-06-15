@@ -1,6 +1,7 @@
 encrypt = require('../utilities/encryption');
 var db = require('../lib/dbConnection');
 
+
 exports.getCasesByStatus = function(req,res) {
 	//connection.connect();
 	var devStatus = req.params.devStatus;
@@ -440,13 +441,13 @@ exports.createLogin = function(req,res) {
 	var userData = req.body;
 	userData.display_name = userData.first_name + " " + userData.last_name;
 	userData.salt = encrypt.createSalt();
-	//userData.hash_password = encrypt.hashPwd(userData.salt,userData.password);
-	userData.hash_password = userData.password;
+	userData.hash_password  = encrypt.hashPwd(userData.password,userData.salt);
+	//userData.hash_password = userData.password;
 	userData.last_login = null;
 	userData.enabled = 0;
 	userData.token = null;
-	userData.type = 'user',
-	userData.med_school = null
+	userData.type = 'user';
+	userData.med_school = null;
 	delete userData.password;  // remove un-needed field
 	db.query('insert into user set ?',[userData],function(err,insertResult){
 		if (err) {
@@ -821,6 +822,11 @@ exports.saveImages = function(req,res) {
 	  		});
 	  		
 	   	});
+}
+
+exports.getMasterData = function(req,res) {
+	var masterData = require('../data/masterData.json');
+	res.send(masterData);
 }
 function reformatForMySQL(arrayObject) {
 	// this function reformat json data into format usable for insert and upddate records to mySql database
