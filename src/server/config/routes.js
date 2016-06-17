@@ -52,6 +52,7 @@ module.exports = function(app) {
   app.post('/api/mmwrcase/updateRating',mmwrCase.updateRating);
   app.post('/api/mmwrcase/testReformatted', mmwrCase.testReformatted);
   app.post('/api/mmwrcase/saveImages', mmwrCase.saveImages);
+  app.post('/api/mmwrcase/saveResult',mmwrCase.saveResult);
 
 // registration
   app.post('/api/mmwrcase/createLogin', mmwrCase.createLogin);

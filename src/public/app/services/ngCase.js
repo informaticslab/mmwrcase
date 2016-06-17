@@ -56,7 +56,12 @@ angular.module('app').factory('ngCase', function($http,dialogs,$window, $state) 
 				//No
 				});	
 			}	
+		},
+		saveResult : function(data) {
+			console.log(data);
+			return $http.post('/api/mmwrcase/saveResult',data);
 		}
+
 	}
 
 });

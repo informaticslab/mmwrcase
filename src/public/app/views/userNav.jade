@@ -1,7 +1,7 @@
 .navbar-right
     ul.nav.navbar-nav.navbar-right(ng-controller='loginCtrl')
         a.dropdown-toggle(href='' data-toggle='dropdown')
-            | {{identity.currentUser.display_name}} 
+            | {{identity.currentUser.user_name}}
             b.caret
         ul.dropdown-menu.pull-right.user-dd
             li

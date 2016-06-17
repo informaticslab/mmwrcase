@@ -1,4 +1,4 @@
-angular.module('app').controller('resultsCtrl', function($scope, ngTest, ngCase, $stateParams,$state, dialogs,$window) {
+angular.module('app').controller('resultsCtrl', function($scope, ngTest, ngCase, $stateParams,$state, dialogs,$window,ngIdentity) {
 	$scope.preview = $stateParams.preview;
 	//ngTest.getQuestions($stateParams.caseID).then(function(data) {
 	ngTest.getQuestions($stateParams.caseID, $stateParams.testType).then(function(data) {
@@ -8,12 +8,27 @@ angular.module('app').controller('resultsCtrl', function($scope, ngTest, ngCase,
 	
 	$scope.answerStats={};
 	$scope.selectedAnswer = $stateParams.selectedAnswerID;
-
-	ngCase.getCaseById($stateParams.caseID).success(function(caseData){
+  	ngCase.getCaseById($stateParams.caseID).success(function(caseData){
 		$scope.case = caseData;
 		//console.log($scope.case);
 		ngCase.getAnswerStats($stateParams.caseID,$stateParams.questionID).success(function(statData) {
 			$scope.answerStats = statData;
+			if ($state.params.testType == 'post' && ngIdentity.currentUser) {  // only save if user signed in
+				for (var i = 0; i < $scope.answerStats.length; i++) {  // search for the selected answer
+					if ($scope.answerStats[i].answer_id == $scope.selectedAnswer) {
+						// save history to user profile here
+						data = {
+							user_id: ngIdentity.currentUser.user_id,
+							case_id: $stateParams.caseID,
+							question_id: $stateParams.questionID,
+							selected_answer: $stateParams.selectedAnswerID,
+							result: $scope.answerStats[i].correct
+						};
+						ngCase.saveResult(data);
+						break;
+					}
+				}
+			}
 		});
 	}).error(function(err){
 		console.log('Unable to retrieve case data: '+err);

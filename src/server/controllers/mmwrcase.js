@@ -681,7 +681,7 @@ exports.updateRating = function(req,res) {
 				}
 				else {
 					// update rating to case_main  
-						db.query('update case_main set rating = ? where case_id = ?',[result[0].rated,case_id],function(err,updateResult){
+							db.query('update case_main set rating = ? where case_id = ?',[result[0].rated,case_id],function(err,updateResult){
 							if (err) {
 								res.send(err);
 							}
@@ -827,6 +827,18 @@ exports.saveImages = function(req,res) {
 exports.getMasterData = function(req,res) {
 	var masterData = require('../data/masterData.json');
 	res.send(masterData);
+}
+
+exports.saveResult = function(req,res) {
+	var data = req.body;
+	db.query('insert into user_history set ?',[data], function(err,result){
+		if (err) {
+			 res.send(err);
+		}
+		else {
+			res.send({'success':'result saved'});
+		}
+	})
 }
 function reformatForMySQL(arrayObject) {
 	// this function reformat json data into format usable for insert and upddate records to mySql database

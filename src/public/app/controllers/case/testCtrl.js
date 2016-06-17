@@ -1,4 +1,4 @@
-angular.module('app').controller('testCtrl', function($scope, ngTest, ngCase, $stateParams, $state, dialogs,$window) {
+angular.module('app').controller('testCtrl', function($scope, ngTest, ngCase, $stateParams, $state, dialogs,$window,ngIdentity) {
 	$scope.case;
 	$scope.input = {};
 	$scope.preview = $stateParams.preview;
@@ -35,7 +35,7 @@ angular.module('app').controller('testCtrl', function($scope, ngTest, ngCase, $s
        		$state.go('previewResults',{caseID : $stateParams.caseID, testType: $stateParams.testType, questionID :$scope.questions.question.question_id, selectedAnswerID :  $scope.questions.selectedAnswer, preview:'p'});
        	}
        	else {
-       		$state.go('results',{caseID : $stateParams.caseID, testType: $stateParams.testType, questionID :$scope.questions.question.question_id, selectedAnswerID :  $scope.questions.selectedAnswer});
+			$state.go('results',{caseID : $stateParams.caseID, testType: $stateParams.testType, questionID :$scope.questions.question.question_id, selectedAnswerID :  $scope.questions.selectedAnswer});
 		}
 	};	 
 
