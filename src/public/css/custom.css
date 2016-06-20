@@ -255,6 +255,21 @@ fieldset[disabled] .btn-mmwr.active {
   height:auto;
 
 }
+
+.leader-board {
+  background-color:#ffffff;
+  -webkit-box-shadow: 0px 3px 6px -1px rgba(0,0,0,0.30);
+  -moz-box-shadow: 0px 3px 6px -1px rgba(0,0,0,0.30);
+  box-shadow: 0px 3px 6px -1px rgba(0,0,0,0.30);
+  margin:0px 15px 15px 0px;
+  padding:15px 25px 15px 25px;
+}
+
+.leader-banner {
+  background-color : #503608;
+  color : #ffffff;
+}
+
 .right-column-box {
   background-color:#ffffff;
   -webkit-box-shadow: 0px 3px 6px -1px rgba(0,0,0,0.30);
@@ -508,8 +523,6 @@ a, img {
   .user {float:right; position:relative; margin:7px 35% 15px 0;}
   .footer-text {font-size:12px;
 }
-}
-
 }
 
   

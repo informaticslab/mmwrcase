@@ -60,6 +60,10 @@ mmwrcase.config(['$stateProvider', '$urlRouterProvider',
             templateUrl: 'partials/home/previousCase',
             controller:'previousCaseCtrl'
           },
+          'leaderBoard@home':{
+            templateUrl:'partials/home/leaderBoard',
+            controller :'leaderBoardCtrl'
+          },
           'linkBox@home': {
             templateUrl: 'partials/home/linkBox',
             controller: 'linkBoxCtrl'
@@ -71,6 +75,7 @@ mmwrcase.config(['$stateProvider', '$urlRouterProvider',
           'footer@home':{
             templateUrl:'partials/footer'
           }
+
         }
         
       })

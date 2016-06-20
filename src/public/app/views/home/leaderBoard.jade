@@ -1,0 +1,20 @@
+.row
+    .col-lg-12.col-md-12.col-sm-12
+        .leader-board
+            .row
+                h4 Case of The Week Top 5 Leaders
+            .row.leader-banner
+                .col-lg-4.col-sm-4.col-sm4
+                    |User
+                .col-lg-4.col-sm-4.col-sm4.text-right
+                    |Case(s) Taken
+                .col-lg-4.col-sm-4.col-sm4.text-right
+                    | Correct Answer
+            .row(ng-repeat='leader in leaders')
+                .col-lg-4.col-sm-4.col-sm4
+                    |{{leader.user_name}}
+                .col-lg-4.col-sm-4.col-sm4.text-right
+                    |{{leader.case_taken }}
+                .col-lg-4.col-sm-4.col-sm4.text-right
+                    |{{leader.correct_percent | number:2 }}%
+

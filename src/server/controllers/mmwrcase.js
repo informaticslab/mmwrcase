@@ -840,6 +840,30 @@ exports.saveResult = function(req,res) {
 		}
 	})
 }
+
+exports.getTopLeaders = function(req,res) {
+	var limitCount = req.params.limit;
+	db.query('select b.user_name,a.user_id,count(1) as case_taken, sum(result = 1) as correct, sum(result = 1) / count(1) * 100 as correct_percent from mmwr_case.user_history as a left join mmwr_case.user as b on a.user_id = b.user_id  group by user_id order by correct_percent desc limit '+ limitCount,[],function(err,result){
+		if (err) {
+			res.send({'error':err});
+		}
+		else {
+			res.send(result);
+		}
+	})
+};
+
+exports.getTopSchools = function(req,res) {
+	var limitCount = req.params.limit;
+	db.query('select b.user_name,a.user_id,count(1) as case_taken, sum(result = 1) as correct, sum(result = 1) / count(1) * 100 as correct_percent from mmwr_case.user_history as a left join mmwr_case.user as b on a.user_id = b.user_id  group by user_id order by correct_percent desc limit +'+limitCount,[],function(err,result){
+		if (err) {
+			res.send({'error':err});
+		}
+		else {
+			res.send(result);
+		}
+	})
+};
 function reformatForMySQL(arrayObject) {
 	// this function reformat json data into format usable for insert and upddate records to mySql database
 

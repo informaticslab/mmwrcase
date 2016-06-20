@@ -60,6 +60,12 @@ angular.module('app').factory('ngCase', function($http,dialogs,$window, $state) 
 		saveResult : function(data) {
 			console.log(data);
 			return $http.post('/api/mmwrcase/saveResult',data);
+		},
+		getTopLeaders : function(limit) {
+			return $http.get('/api/mmwrcase/getTopLeaders/'+limit);
+		},
+		getTopSchools : function(limit) {
+			return $http.get('/api/mmwrcase/getTopSchools/'+limit);
 		}
 
 	}
