@@ -447,7 +447,7 @@ exports.createLogin = function(req,res) {
 	userData.enabled = 0;
 	userData.token = null;
 	userData.type = 'user';
-	userData.med_school = null;
+	//userData.med_school = null;
 	delete userData.password;  // remove un-needed field
 	db.query('insert into user set ?',[userData],function(err,insertResult){
 		if (err) {
@@ -826,7 +826,17 @@ exports.saveImages = function(req,res) {
 
 exports.getMasterData = function(req,res) {
 	var masterData = require('../data/masterData.json');
-	res.send(masterData);
+	db.query('select * from mmwr_case.schools',function(err,result){
+		if (err) {
+			res.send({'error': err});
+		}
+		else {
+			masterData.medicalSchools = result;
+			res.send(masterData);
+		}
+	})
+
+
 }
 
 exports.saveResult = function(req,res) {

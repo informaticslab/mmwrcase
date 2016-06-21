@@ -69,6 +69,17 @@ angular.module('app').controller('loginCtrl',function($scope,$http,ngIdentity,ng
 		});
 	}
 
+	$scope.matchMedSchool = function(val){
+		return _.filter($scope.masterData.medicalSchools, function(school) {
+			return school.name.toLowerCase().indexOf(val.toLowerCase()) > -1;
+		})
+	}
+
+	$scope.setMedicalSchool = function(school) {
+		//console.log('school selected ', school);
+		$scope.registrationData.med_school = school._name;
+	}
+
 	function getMasterData(){
 		$http.get('/api/mmwrcase/getMasterData').then(function(res) {
 			$scope.masterData = res.data;
