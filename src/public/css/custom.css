@@ -270,6 +270,14 @@ fieldset[disabled] .btn-mmwr.active {
   color : #ffffff;
 }
 
+.css-form input.ng-invalid.ng-touched {
+  background-color: #FA787E;
+}
+
+.css-form input.ng-valid.ng-touched {
+  background-color: #78FA89;
+}
+
 .right-column-box {
   background-color:#ffffff;
   -webkit-box-shadow: 0px 3px 6px -1px rgba(0,0,0,0.30);

@@ -50,7 +50,7 @@ angular.module('app').controller('loginCtrl',function($scope,$http,ngIdentity,ng
 		});
 	};
 
-	$scope.createLogin = function() {
+	$scope.createLogin = function(isValid) {
 		// validation?
 		//var newUserData = {
 		//	email: $scope.email,
@@ -58,15 +58,18 @@ angular.module('app').controller('loginCtrl',function($scope,$http,ngIdentity,ng
 		//	first_name: $scope.firstName,
 		//	last_name: $scope.lastName
 		//};
-		$http.post('/api/mmwrcase/createLogin',$scope.registrationData).then(function(res){
-			if(res.data.success) {
-				ngNotifier.notify("Registration successful.  Please continue to login.")
-				$scope.ok();
-			}
-			else {
-				ngNotifier.notifyError('Registrattion not success, please contact site Administrator for assistance');
-			}
-		});
+		//console.log('vadiation status ', isValid);
+		if (isValid) {
+			$http.post('/api/mmwrcase/createLogin', $scope.registrationData).then(function (res) {
+				if (res.data.success) {
+					ngNotifier.notify("Registration successful.  Please continue to login.")
+					$scope.ok();
+				}
+				else {
+					ngNotifier.notifyError('Registrattion not success, please contact site Administrator for assistance');
+				}
+			});
+		}
 	}
 
 	$scope.matchMedSchool = function(val){
