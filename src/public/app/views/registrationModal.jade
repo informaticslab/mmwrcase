@@ -5,19 +5,19 @@ body
 		h4.modal-title Registration
 	.modal-body
 		.well
-			form.css-form(name='registrationForm' ng-controller='loginCtrl' ng-submit="createLogin(registrationForm.$valid)" )
+			form(name='registrationForm' ng-controller='loginCtrl' ng-submit="createLogin(registrationForm.$valid)" class="css-form" )
 				.form-group
 					label User Name:
-						input.form-control.input-lg(type='text' ng-model='registrationData.user_name' required='')
+						input.form-control.input-sm(type='text' ng-model='registrationData.user_name' required='')
 				//.form-group
 					label Last Name:
 					input.form-control.input-lg(type='text' ng-model='lastName')
 				.form-group
 					label Email:
-					input.form-control.input-lg(type='email' placeholder = 'Email' ng-model='registrationData.email' required='')
+					input.form-control.input-sm(type='email' placeholder = 'Email' ng-model='registrationData.email' required='')
 				.form-group
 					label Password:
-					input.form-control.input-lg(type='password' placeholder = 'Password' ng-model='registrationData.password' required='')
+					input.form-control.input-sm(type='password' placeholder = 'Password' ng-model='registrationData.password' required='')
 				.form-group
 					label Years of Practice:
 						|&nbsp;&nbsp;
@@ -25,10 +25,10 @@ body
 						| &nbsp&nbsp; ({{masterData.yearsOfPractice.min}} - {{masterData.yearsOfPractice.max}})
 				.form-group
 					label Profession:
-						select.form-control.input-lg(type='text'  placeholder = 'Profession'  ng-options='p as p for p in masterData.professions' ng-model='registrationData.profession')
+						select.form-control.input-sm(type='text'  placeholder = 'Profession'  ng-options='p as p for p in masterData.professions' ng-model='registrationData.profession')
 				.form-group
 					label Area of Specialty:
-						select.form-control.input-lg(type='text'  placeholder = 'Specialty'  ng-options='s as s for s in masterData.specialties' ng-model='registrationData.specialty')
+						select.form-control.input-sm(type='text'  placeholder = 'Specialty'  ng-options='s as s for s in masterData.specialties' ng-model='registrationData.specialty')
 				.form-group
 					label How many hours a week do you spend providing direct patient care:
 						br
@@ -45,8 +45,14 @@ body
 							input(type="radio" ng-model='registrationData.public_health_trained' ng-value="0")
 							| &nbsp;No
 				.form-group
-					label Medical School Association:
-						input(type="text" ng-model="registrationData.med_school"  placeholder="Search for a school"  typeahead-min-length='1' typeahead="medicalSchool.name for medicalSchool in matchMedSchool($viewValue)" class="form-control")
+					label(style="width:65%") Medical School Association:
+						input.form-control.input-sm(style="width:70%" type="text" ng-model="registrationData.med_school"  placeholder="Search for a school"  typeahead-min-length='1' typeahead="medicalSchool.name for medicalSchool in matchMedSchool($viewValue)")
+					label
+						|&nbsp;
+						input.pull-right(type="checkbox" ng-model="registrationData.leaderboard_opt_school" ng-true-value="1" ng-false-value="0")
+						|&nbsp;&nbsp
+					label(style="font-size: 12px;") Include on Leaderboard
+
 					//select.form-control.input-lg(type='text' placeholder = 'Medical School associated with' typeahead='medicalSchool.id as medicalSchool.name for medicalSchool in masterData.medicalSchools' ng-model='registrationData.medSchoolId')
 						option(value='-1') - Select Medical School  -
-				button.btn.btn-primary.btn-lg(type='submit', style='width:100%;') Register
+				button.btn.btn-primary.btn-lg(type='submit', style='width:100%;' ng-disabled="registrationForm.$invalid") Register

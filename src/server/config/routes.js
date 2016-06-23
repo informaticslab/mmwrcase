@@ -58,7 +58,8 @@ module.exports = function(app) {
 // registration
   app.post('/api/mmwrcase/createLogin', mmwrCase.createLogin);
   app.get( '/api/mmwrcase/getMasterData',mmwrCase.getMasterData);
-
+  app.get( '/api/mmwrcase/getUserProfile/:userId',mmwrCase.getUserProfile);
+  app.post('/api/mmwrcase/updateUserProfile', mmwrCase.updateUserProfile);
   app.get('/partials/*', function(req, res) {
     res.render('../../public/app/views/' + req.params);
   });

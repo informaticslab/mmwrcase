@@ -9,6 +9,9 @@
                     | My Activity 
                     i.fa.fa-check-square.user-icon
             li
+                a(href='#' ng-click='showSettings()')
+                    | My Settings
+            li
                 a(ui-sref='dashboard' ng-show='identity.currentUser.isAdmin()')
                     | Dashboard 
                     i.fa.fa-tachometer.user-icon

@@ -874,6 +874,60 @@ exports.getTopSchools = function(req,res) {
 		}
 	})
 };
+
+exports.getUserProfile = function(req,res){
+	var userId = req.params.userId;
+	db.query('select * from mmwr_case.user where user_id = ?',[userId],function(err,result){
+		if (err) {
+			res.send({'error':err});
+		}
+		else {
+			delete res.salt;
+			delete res.hash_password;
+			res.send(result);
+		}
+	})
+};
+
+
+exports.updateUserProfile = function(req,res){
+	var userData = req.body;
+	var userId = userData.user_id;
+	console.log(userData);
+	delete userData.password;  // remove un-needed field
+	delete userData.changed;
+	delete userData.user_nameEdit;
+	delete userData.emailEdit;
+	delete userData.passwordEdit;
+	delete userData.user_id;
+	if (userData.passwordChanged){
+		userData.salt = encrypt.createSalt();
+		userData.hash_password  = encrypt.hashPwd(userData.newPassword,userData.salt);
+
+	}
+	else {
+		delete userData.salt;
+		delete userData.hash_password;
+	}
+	delete userData.newPassword;
+	delete userData.confirmPassword;
+	delete userData.passwordChanged;
+	//userData.hash_password = userData.password;
+	//userData.med_school = null;
+
+	db.query('update mmwr_case.user set ? where user_id = ?',[userData,userId],function(err,result){
+		if (err) {
+			console.log(err);
+			res.send({'error':err});
+		}
+		else {
+			console.log(result);
+			if (result.changedRows > 0) {
+				res.send({'success':'Profile updated'});
+			}
+		}
+	})
+};
 function reformatForMySQL(arrayObject) {
 	// this function reformat json data into format usable for insert and upddate records to mySql database
 

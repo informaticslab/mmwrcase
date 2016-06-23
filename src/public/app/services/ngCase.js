@@ -66,6 +66,12 @@ angular.module('app').factory('ngCase', function($http,dialogs,$window, $state) 
 		},
 		getTopSchools : function(limit) {
 			return $http.get('/api/mmwrcase/getTopSchools/'+limit);
+		},
+		getUserProfile : function(userId){
+			return $http.get('/api/mmwrcase/getUserProfile/'+userId);
+		},
+		updateUserProfile : function(){
+			return $http.post('/api/mmwrcase/updateUserProfile',data);
 		}
 
 	}

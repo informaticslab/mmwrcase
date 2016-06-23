@@ -1,0 +1,88 @@
+body(ng-controller='loginCtrl')
+	.modal-header.header-background
+		button.close(type='button' ng-click='cancel()')
+			.fa.fa-times
+		h4.modal-title My Settings
+	.modal-body
+		.well(ng-form name='updateForm')
+				.form-group(ng-class="{ 'has-error': updateForm.userName.$invalid && updateForm.userName.$dirty }")
+					label User Name:
+						input.form-control.input-sm(type='text' name = 'userName' ng-model='userProfile.user_name' required ng-readonly='!userProfile.user_nameEdit')
+					label
+						|&nbsp;
+						button.btn.btn-warning.btn-sm(ng-click='editUserProfile("user_name","edit")' ng-show="!userProfile.user_nameEdit") Edit
+						| &nbsp;
+						button.btn.btn-primary.btn-sm(ng-click='editUserProfile("user_name","save")' ng-show="userProfile.user_nameEdit" ng-disabled='updateForm.userName.$invalid') Save
+						| &nbsp;
+						button.btn.btn-danger.btn-sm(ng-click='editUserProfile("user_name","cancel")' ng-show="userProfile.user_nameEdit") Cancel
+				//.form-group
+					label Last Name:
+					input.form-control.input-lg(type='text' ng-model='lastName')
+				.form-group(ng-class="{ 'has-error': updateForm.email.$invalid && updateForm.email.$dirty}")
+					label(style="width:70%")  Email:
+						input.form-control.input-sm(type='email' name='email' placeholder = 'Email' ng-model='userProfile.email' required='' ng-readonly='!userProfile.emailEdit')
+					label
+						| &nbsp;
+						button.btn.btn-warning.btn-sm(ng-click='editUserProfile("email","edit")' ng-show="!userProfile.emailEdit") Edit
+						| &nbsp;
+						button.btn.btn-primary.btn-sm(ng-click='editUserProfile("email","save")' ng-show="userProfile.emailEdit" ng-disabled='updateForm.email.$invalid') Save
+						| &nbsp;
+						button.btn.btn-danger.btn-sm(ng-click='editUserProfile("email","cancel")' ng-show="userProfile.emailEdit") Cancel
+				.form-group(ng-show="!userProfile.passwordEdit" )
+					label(style="width:70%") Password:
+						input.form-control.input-sm(type='password' name='password' placeholder = 'Password' ng-model='userProfile.password' required='' ng-readonly='!userProfile.passwordEdit')
+					label
+						| &nbsp;
+						button.btn.btn-warning.btn-sm(ng-click='editUserProfile("password","edit")' ng-show="!userProfile.passwordEdit") Edit
+				.form-group(ng-show="userProfile.passwordEdit" ng-class="{ 'has-error': updateForm.newPassword.$invalid && updateForm.newPassword.$dirty || updateForm.confirmPassword.$invalid && updateForm.confirmPassword.$dirty}")
+					label(style="width:70%") New Password: (mininum length is 8)
+						input.form-control.input-sm(type='password' name='newPassword' placeholder = 'New Password' ng-minlength='8' ng-model='userProfile.newPassword')
+					label(style="width:70%") Confirm New Password:
+						| &nbsp;
+						i.fa.fa-check(aria-hidden="true" style='color:green' ng-show='passwordMatched() && updateForm.newPassword.$dirty') Matched
+						i.fa.fa-times(aria-hidden="true" style='color:red' ng-show='!passwordMatched() && updateForm.newPassword.$dirty')
+						input.form-control.input-sm(type='password' name='confirmPassword' placeholder = 'Confirm New Password' ng-minlength='8' ng-model='userProfile.confirmPassword')
+					| &nbsp;
+					button.btn.btn-primary.btn-sm(ng-click='editUserProfile("password","save")' ng-show="userProfile.passwordEdit" ng-disabled='(updateForm.newPassword.$invalid && updateForm.newPassword.$dirty) || !passwordMatched()') Save
+					| &nbsp;
+					button.btn.btn-danger.btn-sm(ng-click='editUserProfile("password","cancel")' ng-show="userProfile.passwordEdit") Cancel
+				.form-group
+					label Years of Practice:
+						|&nbsp;&nbsp;
+						input(type='number' max = '{{masterData.yearsOfPractice.max}}' min = '{{masterData.yearsOfPractice.min}}' ng-model='userProfile.years_of_practice' )
+						| &nbsp&nbsp; ({{masterData.yearsOfPractice.min}} - {{masterData.yearsOfPractice.max}})
+				.form-group
+					label Profession:
+						select.form-control.input-sm(type='text'  placeholder = 'Profession'  ng-options='p as p for p in masterData.professions' ng-model='userProfile.profession')
+				.form-group
+					label Area of Specialty:
+						select.form-control.input-sm(type='text'  placeholder = 'Specialty'  ng-options='s as s for s in masterData.specialties' ng-model='userProfile.specialty')
+				.form-group
+					label How many hours a week do you spend providing direct patient care:
+						br
+						input(type="number" max = '{{masterData.patientCareHours.max}}' min = '{{masterData.patientCareHours.min}}' ng-model = 'userProfile.patient_hrs')
+						| &nbsp&nbsp; ({{masterData.patientCareHours.min}} - {{masterData.patientCareHours.max}})
+				.form-group
+					label Training or experience in Public Health:
+						br
+						label
+							input(type="radio" ng-model='userProfile.public_health_trained' ng-value="1")
+							| &nbsp; Yes
+						label &nbsp&nbsp;&nbsp&nbsp;
+						label
+							input(type="radio" ng-model='userProfile.public_health_trained' ng-value="0")
+							| &nbsp;No
+				.form-group
+					label(style="width:65%") Medical School Association:
+						input.form-control.input-sm(style="width:70%" type="text" ng-model="userProfile.med_school"  placeholder="Search for a school"  typeahead-min-length='1' typeahead="medicalSchool.name for medicalSchool in matchMedSchool($viewValue)")
+					label
+						|&nbsp;
+						input.pull-right(type="checkbox" ng-model="userProfile.leaderboard_opt_school" ng-true-value="1" ng-false-value="0")
+						|&nbsp;&nbsp
+					label(style="font-size: 12px;") &nbsp;&nbsp Include on Leaderboard
+
+					//select.form-control.input-lg(type='text' placeholder = 'Medical School associated with' typeahead='medicalSchool.id as medicalSchool.name for medicalSchool in masterData.medicalSchools' ng-model='registrationData.medSchoolId')
+						option(value='-1') - Select Medical School  -
+				button.btn.btn-primary.btn-lg(type='submit', style='width:100%;' ng-click="updateProfile(updateForm.$valid)" ng-disabled="!updateForm.$valid || (!userProfileChanged())") Update
+				pre
+				| {{$scope.bckProfile}}
