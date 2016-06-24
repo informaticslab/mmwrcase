@@ -151,13 +151,14 @@ var userSettingsModalCtrl = function($scope,$modalInstance,$http,ngNotifier,user
 	$scope.matchMedSchool = matchMedSchool;
 	$scope.bckProfile = {};
 	$scope.userProfile ={};
+	$scope.editingFlags = {};
 	$http.get('/api/mmwrcase/getUserProfile/'+userId).then(function(res) {
 		if (res.data) {
 			$scope.userProfile = res.data[0];
 			$scope.userProfile.password = '**********';
 			$scope.userProfile.newPassword ='';
 			$scope.userProfile.confirmPassword='';
-			$scope.bckProfile = JSON.parse(JSON.stringify($scope.userProfile));
+			$scope.bckProfile = angular.copy($scope.userProfile);
 		//	console.log($scope.userProfile);
 		}
 	});
@@ -167,23 +168,24 @@ var userSettingsModalCtrl = function($scope,$modalInstance,$http,ngNotifier,user
 		var editingField = fieldName + 'Edit'
 		//console.log(editingField);
 		if (mode == 'edit') {
-			$scope.userProfile[editingField] = true;
+			$scope.editingFlags[editingField] = true;
 
 		}
 		else if (mode == 'cancel') {
 			$scope.userProfile[fieldName] = $scope.bckProfile[fieldName];
-			$scope.userProfile[editingField] = false;
+			$scope.editingFlags[editingField] = false;
 		}
 		else {
-			if (fieldName == 'password') {
-					$scope.userProfile.passwordChanged = true;
-			}
-			$scope.userProfile[editingField] = false;
+			//if (fieldName == 'password') {
+			//		$scope.userProfile.passwordChanged = true;
+			//}
+			$scope.editingFlags[editingField] = false;
 		}
 	};
 
 	$scope.userProfileChanged = function() {
-		return (JSON.stringify($scope.bckProfile) != JSON.stringify($scope.userProfile));
+		return JSON.stringify($scope.bckProfile) != JSON.stringify($scope.userProfile);
+		//return !angular.equals($scope.bckProfile,$scope.userProfile);
 	}
 
 	$scope.passwordMatched = function(){
@@ -204,6 +206,13 @@ var userSettingsModalCtrl = function($scope,$modalInstance,$http,ngNotifier,user
 				}
 			});
 		}
+	}
+
+	function updateFlagsOff(){
+		return (JSON.stringify($scope.editingFlags).indexOf('true') == -1);
+	}
+	$scope.okToSave = function() {
+		return $scope.userProfileChanged() && updateFlagsOff();
 	}
 
 	$scope.ok = function () {
