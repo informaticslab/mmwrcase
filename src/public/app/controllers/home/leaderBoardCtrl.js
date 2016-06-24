@@ -3,7 +3,7 @@ angular.module('app').controller('leaderBoardCtrl', function($scope, $http, $mod
 
     $scope.limitCount = 5;
     getTopLeaders($scope.limitCount);
-    //getTopSchools($scope.limitCount);
+    getTopSchools($scope.limitCount);
 
     function getTopLeaders(limit) {
         ngCase.getTopLeaders(limit)
@@ -19,6 +19,7 @@ angular.module('app').controller('leaderBoardCtrl', function($scope, $http, $mod
     function getTopSchools(limit) {
         ngCase.getTopSchools(limit)
             .success(function(schools) {
+                console.log(schools);
                 $scope.schools = schools;
             })
             .error(function(err) {

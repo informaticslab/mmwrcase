@@ -64,6 +64,10 @@ mmwrcase.config(['$stateProvider', '$urlRouterProvider',
             templateUrl:'partials/home/leaderBoard',
             controller :'leaderBoardCtrl'
           },
+          'leaderBoardSchool@home':{
+            templateUrl:'partials/home/leaderBoardSchool',
+            controller :'leaderBoardCtrl'
+          },
           'linkBox@home': {
             templateUrl: 'partials/home/linkBox',
             controller: 'linkBoxCtrl'

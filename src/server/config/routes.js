@@ -35,6 +35,7 @@ module.exports = function(app) {
   app.get('/api/mmwrcase/getNextCaseId',mmwrCase.getNextCaseId);
   app.get('/api/mmwrcase/getDraftCases',mmwrCase.getDraftCases);
   app.get('/api/mmwrcase/getTopLeaders/:limit',mmwrCase.getTopLeaders);
+  app.get('/api/mmwrcase/getTopSchools/:limit',mmwrCase.getTopSchools);
 
 
 // image upload section

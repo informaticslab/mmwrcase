@@ -520,6 +520,10 @@ fieldset[disabled] .btn-mmwr.active {
   margin-right:10px;
 }
 
+.tableStripe{
+  /*background-color: #f7f7f7;*/
+  background-color: #C8C8C8;
+}
 
 a, img {
   cursor:pointer;
