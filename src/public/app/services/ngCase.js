@@ -72,6 +72,9 @@ angular.module('app').factory('ngCase', function($http,dialogs,$window, $state) 
 		},
 		updateUserProfile : function(){
 			return $http.post('/api/mmwrcase/updateUserProfile',data);
+		},
+		getUserHistory : function(userId){
+			return $http.get('/api/mmwrcase/getUserHistory/'+userId);
 		}
 
 	}

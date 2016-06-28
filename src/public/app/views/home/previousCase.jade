@@ -22,7 +22,7 @@
 						span.status-not-taken.pull-right(ng-show='taken(case.case_id) == null')
 							| Not Taken
 						span.status-not-taken.pull-right(ng-show='taken(case.case_id) != null')
-							| Taken	{{taken(case.case_id)}}
+							| Taken: {{taken(case.case_id) | date:'MM/dd/yyyy @ h:mma' }}
 					.col-lg-12.col-md-12.col-sm-12
 						| {{case.tag_line}}
 						hr

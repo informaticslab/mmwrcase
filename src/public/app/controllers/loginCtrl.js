@@ -1,6 +1,6 @@
-angular.module('app').controller('loginCtrl',function($scope,$http,ngIdentity,ngNotifier,ngAuth,$location,$window,$log,$modal, $state,ngCase){
+angular.module('app').controller('loginCtrl',function($scope,$http,ngIdentity,ngNotifier,ngAuth,$location,$window,$log,$modal, $state,ngCase,$rootScope){
 	$scope.identity = ngIdentity;
-	$scope.newRegistration = {};
+	$scope.userHistory;
 	$scope.userProfile = {};
 	$scope.registrationData = {};
 	$scope.masterData = getMasterData();
@@ -8,6 +8,11 @@ angular.module('app').controller('loginCtrl',function($scope,$http,ngIdentity,ng
 		ngAuth.authenticateUser(email,password).then(function(success) {  
 			
 			if(success) {
+				// get user history if logged in
+				ngCase.getUserHistory($scope.identity.currentUser.user_id).then(function (result) {
+						$scope.userHistory = result.data;
+						$rootScope.$emit('historyAvailable',$scope.userHistory);
+				});
 				$state.go('home');
 				$scope.ok();
 			} else {

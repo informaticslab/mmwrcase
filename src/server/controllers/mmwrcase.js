@@ -837,7 +837,7 @@ exports.getMasterData = function(req,res) {
 	})
 
 
-}
+};
 
 exports.saveResult = function(req,res) {
 	var data = req.body;
@@ -849,7 +849,20 @@ exports.saveResult = function(req,res) {
 			res.send({'success':'result saved'});
 		}
 	})
-}
+};
+
+exports.getUserHistory = function(req,res) {
+	var user_id = req.params.userId;
+	db.query('select user_id,case_id,date_completed from user_history where user_id = ? ',[user_id],function(err,result){
+		if (err) {
+			console.log(err);
+			res.send({'error':err});
+		}
+		else {
+			res.send(result);
+		}
+	})
+};
 
 exports.getTopLeaders = function(req,res) {
 	var limitCount = req.params.limit;
