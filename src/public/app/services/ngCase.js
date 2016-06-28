@@ -70,7 +70,7 @@ angular.module('app').factory('ngCase', function($http,dialogs,$window, $state) 
 		getUserProfile : function(userId){
 			return $http.get('/api/mmwrcase/getUserProfile/'+userId);
 		},
-		updateUserProfile : function(){
+		updateUserProfile : function(data){
 			return $http.post('/api/mmwrcase/updateUserProfile',data);
 		},
 		getUserHistory : function(userId){

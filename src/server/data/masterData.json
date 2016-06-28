@@ -3,5 +3,6 @@
   "professions"      : ["Student","Physician","Nurse","Pharmacist","Researcher"],
   "specialties" : ["Medicine","Surgery","Ob-Gyn","Pediatrics","Psychiatry","Public Health"],
   "patientCareHours" : {"min":0, "max":40},
-  "passwordLength" : {"min":3, "max":14}
+  "passwordLength" : {"min":3, "max":14},
+  "userTypes"       : ["admin","user"]
 }

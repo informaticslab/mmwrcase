@@ -19,7 +19,7 @@ angular.module('app').controller('leaderBoardCtrl', function($scope, $http, $mod
     function getTopSchools(limit) {
         ngCase.getTopSchools(limit)
             .success(function(schools) {
-                console.log(schools);
+               // console.log(schools);
                 $scope.schools = schools;
             })
             .error(function(err) {

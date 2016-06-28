@@ -3,7 +3,8 @@ angular.module('app').controller('loginCtrl',function($scope,$http,ngIdentity,ng
 	$scope.userHistory;
 	$scope.userProfile = {};
 	$scope.registrationData = {};
-	$scope.masterData = getMasterData();
+	$scope.masterData;
+	getMasterData();
 	$scope.login = function(email, password){
 		ngAuth.authenticateUser(email,password).then(function(success) {  
 			
@@ -121,8 +122,11 @@ angular.module('app').controller('loginCtrl',function($scope,$http,ngIdentity,ng
 
 
 	function getMasterData(){
+
 		$http.get('/api/mmwrcase/getMasterData').then(function(res) {
 			$scope.masterData = res.data;
+			//console.log('get master data called ', $scope.masterData);
+			$rootScope.$emit('masterDataAvailable',$scope.masterData);
 		});
 	}
 

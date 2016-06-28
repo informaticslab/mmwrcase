@@ -891,17 +891,35 @@ exports.getTopSchools = function(req,res) {
 
 exports.getUserProfile = function(req,res){
 	var userId = req.params.userId;
-	db.query('select * from mmwr_case.user where user_id = ?',[userId],function(err,result){
-	//	console.log(result);
-		if (err) {
-			res.send({'error':err});
-		}
-		else {
-			delete result[0].salt;
-			delete result[0].hash_password;
-			res.send(result);
-		}
-	})
+	if (userId == -1) {
+		db.query('select * from mmwr_case.user',[],function(err,result){
+			console.log(result);
+			if (err) {
+				res.send({'error':err});
+			}
+			else {
+				result.forEach(function(user){
+					delete user.salt;
+					delete user.hash_password;
+				})
+				res.send(result);
+			}
+		})
+	}
+	else {
+		db.query('select * from mmwr_case.user where user_id = ?',[userId],function(err,result){
+			//	console.log(result);
+			if (err) {
+				res.send({'error':err});
+			}
+			else {
+				delete result[0].salt;
+				delete result[0].hash_password;
+				res.send(result);
+			}
+		})
+	}
+
 };
 
 
@@ -915,7 +933,7 @@ exports.updateUserProfile = function(req,res){
 	delete userData.emailEdit;
 	delete userData.passwordEdit;
 	delete userData.user_id;
-	if (userData.newPassword != ''){
+	if (userData.newPassword && userData.newPassword != ''){
 		userData.salt = encrypt.createSalt();
 		userData.hash_password  = encrypt.hashPwd(userData.newPassword,userData.salt);
 
@@ -942,6 +960,20 @@ exports.updateUserProfile = function(req,res){
 		}
 	})
 };
+
+exports.removeUser = function(req,res) {
+	var user_id = req.body.user_id;
+	db.query('update mmwr_case.user set enabled = 2 where user_id = ?',[user_id],function(err,result){
+		//	console.log(result);
+		if (err) {
+			res.send({'error':err});
+		}
+		else {
+			res.send(result);
+		}
+	})
+};
+
 function reformatForMySQL(arrayObject) {
 	// this function reformat json data into format usable for insert and upddate records to mySql database
 

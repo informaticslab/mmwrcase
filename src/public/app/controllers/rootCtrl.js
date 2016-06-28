@@ -26,10 +26,12 @@ angular.module('app').controller('rootCtrl', function($scope, $http, ngCase, $st
 
 	$scope.taken = function(caseId) {
 		if ($scope.identity.currentUser != null && $scope.userHistory){
-		var takenCase = 	_.find($scope.userHistory,function(oneCase){
-			return oneCase.case_id == caseId;
-			});
-		return takenCase.date_completed;
+			if ($scope.userHistory.length > 0) {
+				var takenCase = _.find($scope.userHistory,function(oneCase){
+					return oneCase.case_id == caseId;
+				});
+				return takenCase.date_completed;
+			}
 		}
 	}
 	

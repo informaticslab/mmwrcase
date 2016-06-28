@@ -109,11 +109,12 @@ mmwrcase.config(['$stateProvider', '$urlRouterProvider',
         templateUrl: 'partials/case/additionalInfo',
         controller: 'additionalInfoCtrl'
       })
-      // .state('admin', {
-      //   url:'/admin',
-      //   templateUrl : 'partials/dashboard',
-      //   controller  : 'dashboardCtrl' 
-      // })
+      .state('admin', {
+        url:'/admin/users',
+        templateUrl : 'partials/admin',
+        controller  : 'adminCtrl',
+        resolve : stateRoleChecks.isAdmin
+      })
       .state('dashboard', {
         url:'/admin/dashboard',
         templateUrl : 'partials/dashboard',

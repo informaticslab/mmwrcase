@@ -16,6 +16,10 @@
                     | Dashboard 
                     i.fa.fa-tachometer.user-icon
             li
+                a(ui-sref='admin' ng-show='identity.currentUser.isAdmin()')
+                    | Admin&nbsp;
+                    i.fa.fa-users.user-icon
+            li
                 hr.dd-hr
             li
                 a(href='#' ng-click='logout()')
