@@ -185,10 +185,26 @@ var userSettingsModalCtrl = function($scope,$modalInstance,$http,ngNotifier,user
 			$scope.editingFlags[editingField] = false;
 		}
 		else {
-			//if (fieldName == 'password') {
-			//		$scope.userProfile.passwordChanged = true;
-			//}
 			$scope.editingFlags[editingField] = false;
+			// check for duplicate user_name, email here
+			if (fieldName == 'email') {
+				$http.get('/api/mmwrcase/checkEmailExist/'+ $scope.userProfile.email).then(function(res) {
+					if (res) {
+						ngNotifier.notifyError('Sorry, this email address is already being used for this site.  Please use another email.');
+						$scope.editingFlags[editingField] = true;
+					}
+				})
+			}
+			else if (fieldName == 'user_name') {
+				$http.get('/api/mmwrcase/checkUserNameExist/'+ $scope.userProfile.user_name).then(function(res) {
+					if (res) {
+						ngNotifier.notifyError('Sorry, this user name is already exist.  Please use another user name.');
+						$scope.editingFlags[editingField] = true;
+					}
+				})
+
+			}
+
 		}
 	};
 

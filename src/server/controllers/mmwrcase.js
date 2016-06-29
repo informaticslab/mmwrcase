@@ -440,6 +440,11 @@ exports.updateQuestion = function(req,res) {
 exports.createLogin = function(req,res) {
 	var userData = req.body;
 	userData.display_name = userData.first_name + " " + userData.last_name;
+	if (userData.user_name == '' || userData.user_name == null){
+		// blank user name,  set default to first part of email address
+		var emailParts = userData.email.split('@');
+		userData.user_name = emailParts[0];
+	}
 	userData.salt = encrypt.createSalt();
 	userData.hash_password  = encrypt.hashPwd(userData.password,userData.salt);
 	//userData.hash_password = userData.password;
@@ -502,6 +507,44 @@ exports.updateAnswer = function(req,res) {
 		}
 	})
 }
+
+exports.checkUserNameExist = function(req,res) {
+	var user_name = req.params.user_name;
+	db.query('select 1 from mmwr_case.user where user_name = ?',[user_name],function(err,result){
+		if (err) {
+			console.log(err);
+			res.send(err);
+		}
+		else {
+			if (result.length > 0) {
+				res.send(true);
+			}
+			else {
+				res.send(false);
+			}
+		}
+
+	})
+};
+
+exports.checkEmailExist = function(req,res) {
+	var email = req.params.email;
+	db.query('select 1 from mmwr_case.user where email = ?',[email],function(err,result){
+		if (err) {
+			console.log(err);
+			res.send(err);
+		}
+		else {
+			if (result.length > 0) {
+				res.send(true);
+			}
+			else {
+				res.send(false);
+			}
+		}
+
+	})
+};
 
 function updateAnswer(answer) {
 	var data = answer;
