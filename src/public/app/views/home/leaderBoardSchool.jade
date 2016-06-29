@@ -2,14 +2,14 @@
     .col-lg-12.col-md-12.col-sm-12
         .leader-board
             .row
-                h4 Case of The Week Top 5 Institutes
+                h4 Case of The Week Top 5 Organizations
             .row.leader-banner
                 .col-lg-7.col-md-7.col-sm-7.col-xs-7
-                    |Institute
+                    |Organization
                 .col-lg-2.col-md-2.col-sm-2.col-xs-2.text-right
                     |Case(s)
                 .col-lg-3.col-md-3.col-sm-3.col-xs-3.text-right
-                    | Correct Answer
+                    | Score
             .row(ng-repeat='leader in schools' ng-class-odd="'tableStripe'")
                 .col-lg-7.col-md-7.col-sm-7.col-xs-7
                     |{{leader.med_school}}
