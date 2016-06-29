@@ -10,10 +10,11 @@
                     i.fa.fa-check-square.user-icon
             li
                 a(href='#' ng-click='showSettings()')
-                    | My Settings
+                    | My Settings&nbsp;
+                    i.fa.fa-cog.user-icon
             li
-                a(ui-sref='dashboard' ng-show='identity.currentUser.isAdmin()')
-                    | Dashboard 
+                a(ui-sref='dashboard' ng-show='identity.currentUser.isAuthor()')
+                    | Authoring&nbsp;
                     i.fa.fa-tachometer.user-icon
             li
                 a(ui-sref='admin' ng-show='identity.currentUser.isAdmin()')

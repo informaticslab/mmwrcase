@@ -19,7 +19,10 @@ var mmwrcase = angular.module('app', [
 
 var stateRoleChecks = {
   isAdmin:{auth: function(ngAuth){
-    return ngAuth.authorizeCurrentUserForRoute('admin')
+    return ngAuth.authorizeCurrentUserForRoute('admin');
+  }},
+  isAuthor:{auth: function(ngAuth){
+    return ngAuth.authorizeCurrentUserForRoute('author');
   }}
 };
 

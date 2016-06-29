@@ -4,5 +4,8 @@
   "specialties" : ["Medicine","Surgery","Ob-Gyn","Pediatrics","Psychiatry","Public Health"],
   "patientCareHours" : {"min":0, "max":40},
   "passwordLength" : {"min":3, "max":14},
-  "userTypes"       : ["admin","user"]
+  "userTypes"       : ["admin","author","user"],
+  "userTypes2"       : [{"type":"admin","level":3},{"type":"author","level":2},{"type":"user", "level":1}]
 }
+
+
