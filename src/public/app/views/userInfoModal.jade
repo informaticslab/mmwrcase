@@ -77,7 +77,7 @@ body(ng-controller='loginCtrl')
 						input.form-control.input-sm(style="width:70%" type="text" ng-model="userProfile.med_school"  placeholder="Search for a school"  typeahead-min-length='1' typeahead="medicalSchool.name for medicalSchool in matchMedSchool($viewValue)")
 					label
 						|&nbsp;
-						input.pull-right(type="checkbox" ng-model="userProfile.leaderboard_opt_school" ng-true-value="1" ng-false-value="0")
+						input.pull-right(type="checkbox" ng-model="userProfile.leaderboard_opt_school" ng-true-value="1" ng-false-value="0" ng-disabled='!userProfile.med_school')
 						|&nbsp;&nbsp
 					label(style="font-size: 12px;") &nbsp;&nbsp Include on Leaderboard
 
