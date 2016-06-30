@@ -711,6 +711,7 @@ exports.updateRating = function(req,res) {
 	var data = req.body;
 	var case_id = data.caseId;
 	var rating =  data.rating;
+	var user_id  = data.user_id;
 	var  rateColumn = 'rating_'+ rating;
 	var sqlStr = 'update rating set '+ rateColumn + ' = IFNULL(' + rateColumn + ',0) + 1 where case_id = ' + case_id;
 	db.query(sqlStr,function(err,result){
@@ -733,6 +734,18 @@ exports.updateRating = function(req,res) {
 								res.send('rating added');
 							}
 						});
+					// update rating to user history
+						if (user_id) {
+							db.query('update user_history set rated = ? where user_id = ? and case_id = ?',[rating,user_id,case_id],function(err,result){
+								if (err) {
+									console.log('user history rating update error: ',err);
+									res.send(err);
+								}
+								else {
+									res.send('user history rating updated');
+								}
+							})
+						}
 						
 					}
 		  	});
@@ -896,7 +909,7 @@ exports.saveResult = function(req,res) {
 
 exports.getUserHistory = function(req,res) {
 	var user_id = req.params.userId;
-	db.query('select user_id,case_id,date_completed from user_history where user_id = ? ',[user_id],function(err,result){
+	db.query('select user_id,a.case_id,title,date_completed,result,rated from user_history a left join case_main b on a.case_id = b.case_id where user_id = ? ',[user_id],function(err,result){
 		if (err) {
 			console.log(err);
 			res.send({'error':err});

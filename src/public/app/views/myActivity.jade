@@ -1,0 +1,31 @@
+body(ng-controller='loginCtrl')
+    .modal-header.header-background
+        button.close(type='button' ng-click='cancel()')
+            .fa.fa-times
+        h4.modal-title My Activity
+    .modal-body
+        .well
+            .table-responsive
+                table.table.table-bordered.tablehover(style='background-color:#ffffff;')
+                    thead
+                        tr(style='background-color:#e9e9e9; color:#000000;')
+                            th    Case
+                            th    Date Taken
+                            th    Rating
+                            th    Score
+                    tbody
+                        tr(ng-repeat='case in userHistory')
+                            td
+                                a(ui-sref='overview({caseID:case.case_id})') {{case.title}}&nbsp;
+                            td  {{case.date_completed |                     date:'MM/dd/yyyy'}}
+                            td
+                                rating.rating-no-pointer(ng-model='case.rated' max ='5' readOnly='' on-hover='hoveringOver(value)' on-leave='overStar = null')
+                                    | ({{case.rated}})
+                            td  {{case.result == 1 ? 100 : 0}}
+                        tr
+                span.pull-right| Total Cases Taken: {{caseTotal}}
+                br
+                span.pull-right| Average Score : {{caseAverage | number:2}}
+            br
+            br
+            br

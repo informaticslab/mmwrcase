@@ -118,7 +118,28 @@ angular.module('app').controller('loginCtrl',function($scope,$http,ngIdentity,ng
 
 	};
 
+	$scope.showMyActivity = function(size) {
+		var modalInstance = $modal.open({
+			animation: $scope.animationEnabled,
+			templateUrl: 'partials/myActivity',
+			controller: 'myActivityModalCtrl',
+			size:size,
+			keyboard : false,
+			resolve: {
+				userId: function () {
+					return $scope.identity.currentUser.user_id;
+				},
+				userHistory : function() {
+					return $scope.userHistory;
+				}
 
+			}
+		});
+		modalInstance.result.then(function() {
+
+		});
+
+	};
 
 
 	function getMasterData(){
@@ -239,6 +260,34 @@ var userSettingsModalCtrl = function($scope,$modalInstance,$http,ngNotifier,user
 	$scope.okToSave = function() {
 		return $scope.userProfileChanged() && updateFlagsOff();
 	}
+
+	$scope.ok = function () {
+
+		$modalInstance.close();
+	};
+
+	$scope.cancel =  function() {
+		$modalInstance.dismiss('cancel');
+	}
+}
+
+var myActivityModalCtrl = function($scope,$modalInstance,$http,ngNotifier,userId,ngCase){
+
+	ngCase.getUserHistory(userId).then(function (result) {
+		$scope.userHistory = result.data;
+		$scope.caseTotal = $scope.userHistory.length;
+		var resultCounts = _.countBy($scope.userHistory,function(oneCase){
+			return oneCase.result;
+		});
+		var passed = 0;
+		if (resultCounts.hasOwnProperty('1')) {
+			passed = resultCounts['1'];
+		}
+
+		$scope.caseAverage = passed/$scope.caseTotal * 100;
+	});
+
+
 
 	$scope.ok = function () {
 
