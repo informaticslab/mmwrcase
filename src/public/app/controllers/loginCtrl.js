@@ -272,22 +272,27 @@ var userSettingsModalCtrl = function($scope,$modalInstance,$http,ngNotifier,user
 }
 
 var myActivityModalCtrl = function($scope,$modalInstance,$http,ngNotifier,userId,ngCase){
+	$scope.statistic = {
+		caseTotal : 0,
+		caseAverage : 0,
+		passCount : 0,
+		failCount : 0
+	};
 
 	ngCase.getUserHistory(userId).then(function (result) {
-		$scope.userHistory = result.data;
-		$scope.caseTotal = $scope.userHistory.length;
-		var resultCounts = _.countBy($scope.userHistory,function(oneCase){
-			return oneCase.result;
-		});
-		var passed = 0;
-		if (resultCounts.hasOwnProperty('1')) {
-			passed = resultCounts['1'];
-		}
+	 if (result.data.length > 0) {
+		 $scope.userHistory = result.data;
+		 $scope.statistic.caseTotal = $scope.userHistory.length;
 
-		$scope.caseAverage = passed/$scope.caseTotal * 100;
+		 var resultCounts = _.countBy($scope.userHistory, function (oneCase) {
+			 return oneCase.result;
+		 });
+		 if (resultCounts.hasOwnProperty('1')) {
+			 $scope.statistic.passCount = resultCounts['1'];
+		 }
+		 $scope.statistic.caseAverage = $scope.statistic.passCount / $scope.statistic.caseTotal * 100;
+	 }
 	});
-
-
 
 	$scope.ok = function () {
 

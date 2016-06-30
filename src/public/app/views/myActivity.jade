@@ -19,13 +19,13 @@ body(ng-controller='loginCtrl')
                                 a(ui-sref='overview({caseID:case.case_id})') {{case.title}}&nbsp;
                             td  {{case.date_completed |                     date:'MM/dd/yyyy'}}
                             td
-                                rating.rating-no-pointer(ng-model='case.rated' max ='5' readOnly='' on-hover='hoveringOver(value)' on-leave='overStar = null')
+                                rating.rating-no-pointer(ng-model='case.rated' max ='5' readOnly='true' on-hover='hoveringOver(value)' on-leave='overStar = null')
                                     | ({{case.rated}})
                             td  {{case.result == 1 ? 100 : 0}}
                         tr
-                span.pull-right| Total Cases Taken: {{caseTotal}}
+                span.pull-right| Total Cases Taken: {{statistic.caseTotal}}
                 br
-                span.pull-right| Average Score : {{caseAverage | number:2}}
+                span.pull-right| Average Score : {{statistic.caseAverage | number:2 }}%
             br
             br
             br
