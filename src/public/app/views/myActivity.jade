@@ -15,17 +15,16 @@ body(ng-controller='loginCtrl')
                             th    Score
                     tbody
                         tr(ng-repeat='case in userHistory')
-                            td
-                                a(ui-sref='overview({caseID:case.case_id})') {{case.title}}&nbsp;
+                            td  {{case.title}}&nbsp;
+                                //a(ui-sref='overview({caseID:case.case_id})') {{case.title}}&nbsp;
                             td  {{case.date_completed |                     date:'MM/dd/yyyy'}}
                             td
                                 rating.rating-no-pointer(ng-model='case.rated' max ='5' readOnly='true' on-hover='hoveringOver(value)' on-leave='overStar = null')
                                     | ({{case.rated}})
                             td  {{case.result == 1 ? 100 : 0}}
-                        tr
-                span.pull-right| Total Cases Taken: {{statistic.caseTotal}}
+                span.pull-right Total Cases Taken: {{statistic.caseTotal|number}}
                 br
-                span.pull-right| Average Score : {{statistic.caseAverage | number:2 }}%
+                span.pull-right Average Score: {{statistic.caseAverage | number:2 }}%
             br
             br
             br
