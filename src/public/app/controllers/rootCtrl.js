@@ -25,14 +25,19 @@ angular.module('app').controller('rootCtrl', function($scope, $http, ngCase, $st
 	$scope.animationEnabled = true;
 
 	$scope.taken = function(caseId) {
-		if ($scope.identity.currentUser != null && $scope.userHistory){
+		var dateCompleted = null;
+		if ($scope.identity.currentUser && $scope.userHistory){
 			if ($scope.userHistory.length > 0) {
 				var takenCase = _.find($scope.userHistory,function(oneCase){
 					return oneCase.case_id == caseId;
 				});
-				return takenCase.date_completed;
+				if (takenCase) {
+					dateCompleted = takenCase.date_completed;
+				}
 			}
 		}
+		return dateCompleted;
+
 	}
 	
 

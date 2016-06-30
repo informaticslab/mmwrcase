@@ -19,10 +19,10 @@
 						span.status-complete.pull-right
 							| Completed
 					.col-lg-5.col-md-4.col-sm-4.col-xs-4
-						span.status-not-taken.pull-right(ng-show='taken(case.case_id) == null')
+						span.status-not-taken.pull-right(ng-show='taken(case.case_id) == null && identity.currentUser.user_name')
 							| Not Taken
 						span.status-not-taken.pull-right(ng-show='taken(case.case_id) != null')
-							| Taken: {{taken(case.case_id) | date:'MM/dd/yyyy @ h:mma' }}
+							| Taken: {{taken(case.case_id) | date:'MM/dd/yyyy' }}
 					.col-lg-12.col-md-12.col-sm-12
 						| {{case.tag_line}}
 						hr
