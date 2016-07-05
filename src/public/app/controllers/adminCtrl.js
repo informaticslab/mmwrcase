@@ -43,7 +43,7 @@ angular.module('app').controller('adminCtrl', function($scope, ngCase,$modal,$wi
         if (answer) {
             user.newPassword = 'Password1!';
             ngCase.updateUserProfile(user);
-            ngNotifier.notify('You have reset the password for user ' + user.user_Name + ' to the default passwor: "Password1!"')
+            ngNotifier.notify('You have reset the password for user ' + user.user_Name + ' to the default password: "Password1!"')
         }
     };
 
