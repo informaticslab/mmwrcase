@@ -64,6 +64,7 @@ module.exports = function(app) {
   app.get( '/api/mmwrcase/getMasterData',mmwrCase.getMasterData);
   app.get( '/api/mmwrcase/getUserProfile/:userId',mmwrCase.getUserProfile);
   app.post('/api/mmwrcase/updateUserProfile', mmwrCase.updateUserProfile);
+  app.post('/api/mmwrcase/updateUserHistory', mmwrCase.updateUserHistory);
   app.get('/partials/*', function(req, res) {
     res.render('../../public/app/views/' + req.params);
   });

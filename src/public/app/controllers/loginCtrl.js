@@ -272,6 +272,7 @@ var userSettingsModalCtrl = function($scope,$modalInstance,$http,ngNotifier,user
 }
 
 var myActivityModalCtrl = function($scope,$modalInstance,$http,ngNotifier,userId,ngCase){
+	$scope.isReadOnly = false;
 	$scope.statistic = {
 		caseTotal : 0,
 		caseAverage : 0,
@@ -293,6 +294,39 @@ var myActivityModalCtrl = function($scope,$modalInstance,$http,ngNotifier,userId
 		 $scope.statistic.caseAverage = $scope.statistic.passCount / $scope.statistic.caseTotal * 100;
 	 }
 	});
+
+	$scope.hoveringOver = function(value,caseIndex) {
+		$scope.overStar = value;
+		$scope.percent = 100 * (value / $scope.max);
+	//	console.log('value changes ', value, 'onecase ', caseIndex);
+
+	};
+
+	$scope.rateCase = function(oneCase) {
+		if($scope.caseRating != null){
+			var data = {caseId: $scope.case.case_id, rating: $scope.caseRating};
+			if (ngIdentity.currentUser) {
+				data.user_id = ngIdentity.currentUser.user_id;
+			}
+			//	console.log('ratecase data ', data);
+			$http.post('/api/mmwrcase/updateRating', data).then(function(res){
+//				console.log(res);
+			});
+		}
+
+	};
+
+	$scope.ratingClick = function(index) {
+	//	console.log('user clicked ', index,  ' rated ', $scope.userHistory[index].rated);
+		var data = {
+			user_id : $scope.userHistory[index].user_id,
+			case_id : $scope.userHistory[index].case_id,
+			rated	: $scope.userHistory[index].rated
+		};
+		$http.post('/api/mmwrcase/updateUserHistory', data).then(function(res){
+				console.log(res);
+		});
+	};
 
 	$scope.ok = function () {
 
