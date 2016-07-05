@@ -10,6 +10,8 @@ body
 					input.form-control.input-lg(type='text' placeholder = 'Email' ng-model='email')
 				.form-group
 					input.form-control.input-lg(type='password' placeholder = 'Password' ng-model='password')
+					a(href='mailto:tsavel@cdc.gov?subject=MMWR Case of the Week password reset')
+						span(style="font-size:11px") Forgot Password
 				button.btn.btn-primary.btn-lg(type='submit', style='width:100%;' ng-click="login(email, password)") Login
 				br
 				br
