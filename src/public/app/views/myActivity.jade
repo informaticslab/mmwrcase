@@ -2,7 +2,7 @@ body(ng-controller='loginCtrl')
     .modal-header.header-background
         button.close(type='button' ng-click='cancel()')
             .fa.fa-times
-        h4.modal-title My Activity
+        h4.modal-title Summary of History
     .modal-body
         .well
             .table-responsive
@@ -19,12 +19,21 @@ body(ng-controller='loginCtrl')
                                 //a(ui-sref='overview({caseID:case.case_id})') {{case.title}}&nbsp;
                             td  {{case.date_completed |                     date:'MM/dd/yyyy'}}
                             td
-                                rating.rating-no-pointer(ng-model='case.rated' max ='5' readOnly='true' on-hover='hoveringOver(value)' on-leave='overStar = null')
+                                rating.rating-no-pointer(ng-model='case.rated' max ='5' readOnly='isReadOnly' on-hover='hoveringOver(value,$index)' on-leave='overStar = null' ng-click="ratingClick($index)")
                                     | ({{case.rated}})
                             td  {{case.result == 1 ? 100 : 0}}
-                span.pull-right Total Cases Taken: {{statistic.caseTotal|number}}
-                br
-                span.pull-right Average Score: {{statistic.caseAverage | number:2 }}%
+                table(style="width:100%")
+                    tbody
+                        tr
+                            td(style="width:80%; text-align: right;") Total Cases Taken:
+                            td(style="width:20%;text-align: right;") {{statistic.caseTotal|number}}
+                        tr
+                            td(style="width:80%;text-align: right;") Average Score:
+                            td(style="width:20%;text-align: right;") {{statistic.caseAverage | number:2 }}%
+
+                //span.pull-right Total Cases Taken: {{statistic.caseTotal|number}}
+                //br
+                //span.pull-right Average Score: {{statistic.caseAverage | number:2 }}%
             br
             br
             br
