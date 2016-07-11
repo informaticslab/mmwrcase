@@ -17,13 +17,13 @@ angular.module('app').controller('leaderBoardCtrl', function($scope, $http, $mod
     };
 
     function getTopOrganizations(limit) {
-        ngCase.getTopOrganiztions(limit)
+        ngCase.getTopOrganizations(limit)
             .success(function(schools) {
                // console.log(schools);
-                $scope.organiztions = schools;
+                $scope.organizations = schools;
             })
             .error(function(err) {
-                console.log('Unable to get organiztions data');
+                console.log('Unable to get organizations data');
             });
     };
     $scope.animationsEnabled = true;

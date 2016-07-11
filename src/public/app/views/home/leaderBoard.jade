@@ -27,6 +27,6 @@
                                 th Case(s) Taken
                                 th Score
                             tr(ng-repeat='leader in organizations')
-                                td{{leader.user_name}}
+                                td{{leader.organization}}
                                 td{{leader.case_taken }}
                                 td{{leader.correct_percent | number:2 }}%
