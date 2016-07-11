@@ -10,11 +10,11 @@ body(ng-controller='loginCtrl')
 						input.form-control.input-sm(type='text' name = 'userName' ng-model='userProfile.user_name' required ng-readonly='!editingFlags.user_nameEdit')
 					label
 						|&nbsp;
-					button.btn.btn-warning.btn-sm(ng-click='editUserProfile("user_name","edit");' ng-show="!editingFlags.user_nameEdit") Edit
+					button.btn.btn-mmwr.btn-sm(ng-click='editUserProfile("user_name","edit");' ng-show="!editingFlags.user_nameEdit") Edit
 					| &nbsp;
-					button.btn.btn-primary.btn-sm(ng-click='editUserProfile("user_name","update");' ng-show="editingFlags.user_nameEdit" ng-disabled='updateForm.userName.$invalid') Update
+					button.btn.btn-mmwr.btn-sm(ng-click='editUserProfile("user_name","update");' ng-show="editingFlags.user_nameEdit" ng-disabled='updateForm.userName.$invalid') Confirm
 					| &nbsp;
-					button.btn.btn-danger.btn-sm(ng-click='editUserProfile("user_name","cancel");' value="cancel" ng-show="editingFlags.user_nameEdit") Cancel
+					button.btn.btn-secondary.btn-sm(ng-click='editUserProfile("user_name","cancel");' value="cancel" ng-show="editingFlags.user_nameEdit") Cancel
 				//.form-group
 					label Last Name:
 					input.form-control.input-lg(type='text' ng-model='lastName')
@@ -23,17 +23,17 @@ body(ng-controller='loginCtrl')
 						input.form-control.input-sm(type='email' name='email' placeholder = 'Email' ng-model='userProfile.email' required='' ng-readonly='!editingFlags.emailEdit')
 					label
 						| &nbsp;
-					button.btn.btn-warning.btn-sm(ng-click='editUserProfile("email","edit");' ng-show="!editingFlags.emailEdit") Edit
+					button.btn.btn-mmwr.btn-sm(ng-click='editUserProfile("email","edit");' ng-show="!editingFlags.emailEdit") Edit
 					| &nbsp
-					button.btn.btn-primary.btn-sm(ng-click='editUserProfile("email","update");' ng-show="editingFlags.emailEdit" ng-disabled='updateForm.email.$invalid') Update
+					button.btn.btn-mmwr.btn-sm(ng-click='editUserProfile("email","update");' ng-show="editingFlags.emailEdit" ng-disabled='updateForm.email.$invalid') Confirm
 					| &nbsp
-					button.btn.btn-danger.btn-sm(ng-click='editUserProfile("email","cancel");' value="cancel" ng-show="editingFlags.emailEdit") Cancel
+					button.btn.btn-secondary.btn-sm(ng-click='editUserProfile("email","cancel");' value="cancel" ng-show="editingFlags.emailEdit") Cancel
 				.form-group(ng-show="!editingFlags.passwordEdit" )
 					label(style="width:70%") Password:
 						input.form-control.input-sm(type='password' name='password' placeholder = 'Password' ng-model='userProfile.password' required='' ng-readonly='!editingFlags.passwordEdit')
 					label
 						| &nbsp;
-						button.btn.btn-warning.btn-sm(ng-click='editUserProfile("password","edit")' ng-show="!editingFlags.passwordEdit") Edit
+						button.btn.btn-mmwr.btn-sm(ng-click='editUserProfile("password","edit")' ng-show="!editingFlags.passwordEdit") Edit
 				.form-group(ng-show="editingFlags.passwordEdit" ng-class="{ 'has-error': updateForm.newPassword.$invalid && updateForm.newPassword.$dirty || updateForm.confirmPassword.$invalid && updateForm.confirmPassword.$dirty}")
 					label(style="width:70%") New Password: (mininum length is {{masterData.passwordLength.min}})
 						input.form-control.input-sm(type='password' name='newPassword' placeholder = 'New Password' ng-minlength='{{masterData.passwordLength.min}}' ng-model='userProfile.newPassword')
@@ -43,9 +43,9 @@ body(ng-controller='loginCtrl')
 						i.fa.fa-times(aria-hidden="true" style='color:red' ng-show='!passwordMatched() && updateForm.newPassword.$dirty')
 						input.form-control.input-sm(type='password' name='confirmPassword' placeholder = 'Confirm New Password' ng-minlength='{{masterData.passwordLength.min}}' ng-model='userProfile.confirmPassword')
 					| &nbsp;
-					button.btn.btn-primary.btn-sm(ng-click='editUserProfile("password","update");' ng-show="editingFlags.passwordEdit" ng-disabled='(updateForm.newPassword.$invalid && updateForm.newPassword.$dirty) || !passwordMatched()') Update
+					button.btn.btn-mmwr.btn-sm(ng-click='editUserProfile("password","update");' ng-show="editingFlags.passwordEdit" ng-disabled='(updateForm.newPassword.$invalid && updateForm.newPassword.$dirty) || !passwordMatched()') Confirm
 					| &nbsp;
-					button.btn.btn-danger.btn-sm(ng-click='editUserProfile("password","cancel");' value="cancel" ng-show="editingFlags.passwordEdit") Cancel
+					button.btn.btn-secondary.btn-sm(ng-click='editUserProfile("password","cancel");' value="cancel" ng-show="editingFlags.passwordEdit") Cancel
 				.form-group
 					label Years of Practice:
 						|&nbsp;&nbsp;
@@ -83,4 +83,4 @@ body(ng-controller='loginCtrl')
 
 					//select.form-control.input-lg(type='text' placeholder = 'Medical School associated with' typeahead='medicalSchool.id as medicalSchool.name for medicalSchool in masterData.medicalSchools' ng-model='registrationData.medSchoolId')
 						option(value='-1') - Select Medical School  -
-				button.btn.btn-primary.btn-lg(type='submit', style='width:100%;' ng-click="updateProfile(updateForm.$valid)" ng-disabled="!updateForm.$valid || !okToSave()") Save
+				button.btn.btn-mmwr.btn-lg(type='submit', style='width:100%;' ng-click="updateProfile(updateForm.$valid)" ng-disabled="!updateForm.$valid || !okToSave()") Save
