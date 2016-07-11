@@ -10,9 +10,16 @@ angular.module('app').controller('adminCtrl', function($scope, ngCase,$modal,$wi
         }
     });
 
-    $scope.updateUserType = function(user) {
+    $scope.updateUserType = function(user,oldType) {
        // console.log(user);
-        ngCase.updateUserProfile(user);
+        var answer = confirm('Are you sure you want change user type for user '+ user.user_name + ' ?');
+        if (answer) {
+            ngCase.updateUserProfile(user);
+            ngNotifier.notify("user's type has been updated");
+        }
+        else {  // user decided not to change, reset
+            user.type = oldType;
+        }
     }
 
     $scope.removeUser =  function(user) {

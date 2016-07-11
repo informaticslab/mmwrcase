@@ -6,7 +6,6 @@
                     h2.page-header Admin Settings
             .row(style='margin-top:30px;')
                 .col-lg-3.col-md-4.col-sm-4(style='border-right:1px solid #eeeeee;')
-                    br
                 .row.ng-cloak
                 .col-lg-10.col-md-10.col-sm-10
                         .h4 Manage Users
@@ -23,13 +22,13 @@
                                         td 	{{user.user_name}}
                                         td 	{{user.email}}
                                         td
-                                            select.form-control(type="text" ng-options='o as o for o in masterData.userTypes' ng-model = 'user.type' ng-change="updateUserType(user)")
+                                            select.form-control(type="text" ng-options='o as o for o in masterData.userTypes' ng-model = 'user.type' ng-change="updateUserType(user,'{{user.type}}')")
                                         td
-                                            button.btn.btn-danger(type='button' ng-click='removeUser(user)' data-toggle="tooltip" title="Remove User")
+                                            button.btn.btn-mmwr(type='button' ng-click='removeUser(user)' data-toggle="tooltip" title="Remove User")
                                                 i.fa.fa-trash-o(aria-hidden='true')
                                             |&nbsp; &nbsp;
-                                            button.btn.btn-warning(type='button' ng-click='resetPassword(user)' data-toggle="tooltip" title="Reset Password") Password&nbsp;
+                                            button.btn.btn-mmwr(type='button' ng-click='resetPassword(user)' data-toggle="tooltip" title="Reset to default password of Password1!") Password&nbsp;
                                                 i.fa.fa-refresh(aria-hidden='true')
                         br
-                        br
-                        br
+                        button.btn-mmwr.pull-right(type='button' ui-sref='home')
+                            | Close
