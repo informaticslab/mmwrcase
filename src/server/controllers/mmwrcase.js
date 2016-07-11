@@ -955,7 +955,7 @@ exports.getTopLeaders = function(req,res) {
 	})
 };
 
-exports.getTopSchools = function(req,res) {
+exports.getTopOrganiztions = function(req, res) {
 	var limitCount = req.params.limit;
 	db.query('select b.med_school,count(1) as case_taken, sum(result = 1) as correct, sum(result = 1) / count(1) * 100 as correct_percent from mmwr_case.user_history as a left join mmwr_case.user as b on a.user_id = b.user_id where leaderboard_opt_school = "1" group by med_school order by correct_percent desc limit '+limitCount,[],function(err,result){
 		if (err) {

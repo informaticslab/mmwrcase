@@ -35,7 +35,7 @@ module.exports = function(app) {
   app.get('/api/mmwrcase/getNextCaseId',mmwrCase.getNextCaseId);
   app.get('/api/mmwrcase/getDraftCases',mmwrCase.getDraftCases);
   app.get('/api/mmwrcase/getTopLeaders/:limit',mmwrCase.getTopLeaders);
-  app.get('/api/mmwrcase/getTopSchools/:limit',mmwrCase.getTopSchools);
+  app.get('/api/mmwrcase/getTopOrganiztions/:limit',mmwrCase.getTopOrganiztions);
   app.get('/api/mmwrcase/getUserHistory/:userId',mmwrCase.getUserHistory);
   app.get('/api/mmwrcase/checkUserNameExist/:user_name',mmwrCase.checkUserNameExist);
   app.get('/api/mmwrcase/checkEmailExist/:email',mmwrCase.checkEmailExist);

@@ -132,6 +132,12 @@ fieldset[disabled] .btn-mmwr.active {
 
 }
 
+.panel-default>.panel-heading {
+  color: #fff;
+  background-color: #503608;
+  border-color: #ddd;
+}
+
 .rating-pointer {
   cursor: pointer;
 }

@@ -64,8 +64,8 @@ angular.module('app').factory('ngCase', function($http,dialogs,$window, $state) 
 		getTopLeaders : function(limit) {
 			return $http.get('/api/mmwrcase/getTopLeaders/'+limit);
 		},
-		getTopSchools : function(limit) {
-			return $http.get('/api/mmwrcase/getTopSchools/'+limit);
+		getTopOrganiztions : function(limit) {
+			return $http.get('/api/mmwrcase/getTopOrganiztions/'+limit);
 		},
 		getUserProfile : function(userId){
 			return $http.get('/api/mmwrcase/getUserProfile/'+userId);
