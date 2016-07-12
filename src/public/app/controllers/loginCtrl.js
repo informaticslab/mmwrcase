@@ -141,6 +141,27 @@ angular.module('app').controller('loginCtrl',function($scope,$http,ngIdentity,ng
 
 	};
 
+	$scope.showAdmin = function(size) {
+		var modalInstance = $modal.open({
+			animation: $scope.animationEnabled,
+			templateUrl: 'partials/adminModal',
+			controller: 'usersAdminModalCtrl',
+			size:size,
+			keyboard : false,
+			resolve: {
+				userId: function () {
+					return $scope.identity.currentUser.user_id;
+				},
+				masterData : function() {
+					return $scope.masterData
+				}
+			}
+		});
+		modalInstance.result.then(function() {
+
+		});
+
+	};
 
 	function getMasterData(){
 
@@ -326,6 +347,69 @@ var myActivityModalCtrl = function($scope,$modalInstance,$http,ngNotifier,userId
 		$http.post('/api/mmwrcase/updateUserHistory', data).then(function(res){
 				console.log(res);
 		});
+	};
+
+	$scope.ok = function () {
+
+		$modalInstance.close();
+	};
+
+	$scope.cancel =  function() {
+		$modalInstance.dismiss('cancel');
+	}
+}
+var usersAdminModalCtrl = function($scope,$modalInstance,$http,ngNotifier,ngCase,userId,masterData){
+	$scope.masterData = masterData;
+	$scope.users;
+	$scope.inputRoles;
+	$scope.outputRoles = [];
+	$http.get('/api/mmwrcase/getUserProfile/'+'-1').then(function(res) {
+		if (res.data) {
+			$scope.users = res.data;
+		}
+	});
+	$scope.updateUserType = function(user,oldType) {
+		// console.log(user);
+		var answer = confirm('Are you sure you want change role for user '+ user.user_name + ' from "' + oldType + '" to "'+ user.type +'" ?');
+		if (answer) {
+			ngCase.updateUserProfile(user);
+			ngNotifier.notify("user's role has been changed from " + oldType + " to " + user.type);
+		}
+		else {  // user decided not to change, reset
+			user.type = oldType;
+		}
+	}
+
+	$scope.removeUser =  function(user) {
+		// console.log(user);
+		if (user.user_name == '') {
+			user.user_name = user.display_name;
+		}
+		var answer = confirm('Are you sure you want to delete user '+ user.user_name + ' ?');
+		if (answer) {
+			$http.post('/api/mmwrase/removeUser', user).then(function(res) {
+				//console.log(user);
+				if (res.data.success) {
+					ngNotifier.notify('You have deleted user '+ user.user_name);
+				} else {
+					ngNotifier.notifyError('Error deleteing user');
+				}
+			});
+			$state.transitionTo($state.current, $stateParams, {
+				reload: true,
+				inherit: false,
+				notify: true
+			});
+		}
+	};
+
+	$scope.resetPassword = function(user) {
+		var answer = confirm('Are you sure you want to reset the password for user '+ user.user_name + ' ?');
+		if (answer) {
+			user.newPassword = 'Password1!';
+			ngCase.updateUserProfile(user);
+			ngNotifier.notify('You have reset the password for user ' + user.user_Name + ' to the default password: "Password1!"')
+		}
 	};
 
 	$scope.ok = function () {

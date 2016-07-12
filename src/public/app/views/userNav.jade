@@ -17,7 +17,7 @@
                     | Authoring&nbsp;
                     i.fa.fa-tachometer.user-icon
             li
-                a(ui-sref='admin' ng-show='identity.currentUser.isAdmin()')
+                a(ng-click='showAdmin("lg")' ng-show='identity.currentUser.isAdmin()')
                     | Admin&nbsp;
                     i.fa.fa-users.user-icon
             li
