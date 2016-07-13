@@ -11,9 +11,17 @@ module.exports = function() {
       db.query('select * from user where email = "' + email + '"' , function(err, rows) {
         //console.log(rows);
         //if(rows[0]  && password === rows[0].hash_password) {
-        //var myhashed = encrypt.hashPwd(rows[0].salt,password);
-        if(rows[0]  && bcrypt.compareSync(password,rows[0].hash_password)) {
-          return done(null, rows[0]);
+        //var myhashed =
+        user = {
+          user_id : rows[0].user_id,
+          email   : rows[0].email,
+          hash_password : rows[0].hash_password,
+          user_name : rows[0].user_name,
+          first_name : rows[0].first_name,
+          type       : rows[0].type
+        }
+        if(user && bcrypt.compareSync(password,user.hash_password)) {
+          return done(null,user);
         }
         else {
           return done(null,false);
@@ -24,13 +32,15 @@ module.exports = function() {
 
   passport.serializeUser(function(user, done) {
     if(user){
-      done(null, user.user_id);
+      done(null, user);
     }
   });
 
-  passport.deserializeUser(function(id, done) {
-    db.query("select * from user where user_id = "+id, function(err,rows) {
-      done(err, rows[0]);
+  passport.deserializeUser(function(user, done) {
+    console.log('session user', user)
+    db.query("select * from user where user_id = "+user.user_id, function(err,rows) {
+    user = rows[0];
+      done(err, user);
     });
   });
 

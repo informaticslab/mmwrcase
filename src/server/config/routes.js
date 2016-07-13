@@ -66,6 +66,9 @@ module.exports = function(app) {
   app.post('/api/mmwrcase/updateUserProfile', mmwrCase.updateUserProfile);
   app.post('/api/mmwrcase/updateUserHistory', mmwrCase.updateUserHistory);
   app.get('/partials/*', function(req, res) {
+    if (req._passport.session.user) {
+      req.params['currentUser'] = req._passport.session.user;
+    }
     res.render('../../public/app/views/' + req.params);
   });
 

@@ -23,6 +23,9 @@ var stateRoleChecks = {
   }},
   isAuthor:{auth: function(ngAuth){
     return ngAuth.authorizeCurrentUserForRoute('author');
+  }},
+  isUser:{auth: function(ngAuth){
+    return ngAuth.authorizeCurrentUserForRoute('user');
   }}
 };
 
@@ -83,8 +86,13 @@ mmwrcase.config(['$stateProvider', '$urlRouterProvider',
             templateUrl:'partials/footer'
           }
 
+        },
+        resolve : {
+          loggedin :['ngIdentity', function(ngIdentity) {
+            return ngIdentity.isAuthenticated();
+          }
+          ]
         }
-        
       })
       .state('overview', {
         url:'/overview/:caseID',
@@ -122,13 +130,13 @@ mmwrcase.config(['$stateProvider', '$urlRouterProvider',
         url:'/admin/dashboard',
         templateUrl : 'partials/dashboard',
         controller  : 'dashboardCtrl',
-        resolve : stateRoleChecks.isAdmin
+        resolve : stateRoleChecks.isAuthor
       })
       .state('editcase', {
         url:'/admin/editcase/:caseID',
         templateUrl : 'partials/authoring/editCase',
         controller  : 'editCaseCtrl',
-        resolve : stateRoleChecks.isAdmin
+        resolve : stateRoleChecks.isAuthor
       })
       .state('preview', {
         url:'/preview/:caseID',
@@ -138,7 +146,7 @@ mmwrcase.config(['$stateProvider', '$urlRouterProvider',
           preview:true,
         }
       })
-       .state('previewTest', {
+      .state('previewTest', {
         url:'/preview/test/:testType/:caseID',
         templateUrl: 'partials/case/test',
         controller:'testCtrl',
@@ -169,11 +177,13 @@ mmwrcase.config(['$stateProvider', '$urlRouterProvider',
         }
       })
 }]);
-
-// angular.module('app').run(function($rootScope,$location) {
-//   $rootScope.$on('$routeChangeError', function(evt,current, previous,rejection) {
-//     if(rejection === 'not authorized'){
-//       $location.path('/main');
-//     }
-//   }) 
-// });
+mmwrcase.run(['$rootScope','$state','$stateParams','$location','ngIdentity',function($rootScope,$state,$stateParams,$location,ngIdentity) {
+  $rootScope.$on('$stateChangeStart', function (evt, toState, toStateParams) {
+      $rootScope.identity = ngIdentity;
+      $rootScope.toState = toState;
+      $rootScope.toStateParams = toStateParams;
+     if (ngIdentity.isAuthenticated()) {
+         console.log(ngIdentity.currentUser);
+     }
+  })
+}]);
