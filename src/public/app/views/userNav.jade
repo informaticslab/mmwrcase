@@ -7,22 +7,22 @@
             li
                 a(ng-click='showMyActivity()')
                     | My Activity 
-                    i.fa.fa-check-square.user-icon
+                    //i.fa.fa-check-square.user-icon
             li
                 a(ng-click='showSettings()')
                     | My Settings&nbsp;
-                    i.fa.fa-cog.user-icon
+                    //i.fa.fa-cog.user-icon
             li
                 a(ui-sref='dashboard' ng-show='identity.currentUser.isAuthor()')
                     | Authoring&nbsp;
-                    i.fa.fa-tachometer.user-icon
+                    //i.fa.fa-tachometer.user-icon
             li
                 a(ui-sref='admin' ng-show='identity.currentUser.isAdmin()')
                     | Admin&nbsp;
-                    i.fa.fa-users.user-icon
+                    //i.fa.fa-users.user-icon
             li
                 hr.dd-hr
             li
                 a(href='#' ng-click='logout()')
                     | Log off 
-                    i.fa.fa-power-off.user-icon
+                    //i.fa.fa-power-off.user-icon
