@@ -18,7 +18,7 @@ angular.module('app').controller('loginCtrl',function($scope,$http,ngIdentity,ng
 				$scope.ok();
 			} else {
 				//$log.debug(success);
-				ngNotifier.notifyError('Incorrect Email/Password');
+				ngNotifier.notifyError('Incorrect email or password');
 			}
 		});
 		
@@ -70,11 +70,11 @@ angular.module('app').controller('loginCtrl',function($scope,$http,ngIdentity,ng
 		if (isValid) {
 			$http.post('/api/mmwrcase/createLogin', $scope.registrationData).then(function (res) {
 				if (res.data.success) {
-					ngNotifier.notify("Registration successful.  Please continue to login.")
+					ngNotifier.notify("Registration was successful. Please continue to login.")
 					$scope.ok();
 				}
 				else {
-					ngNotifier.notifyError('Registrattion not success, please contact site Administrator for assistance');
+					ngNotifier.notifyError('Registrattion was not successful. Please contact the site administrator for assistance');
 				}
 			});
 		}
