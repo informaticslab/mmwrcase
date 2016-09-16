@@ -21,21 +21,30 @@ require('./server/config/routes.js')(app);
 
 
 
-app.listen(9090);
-console.log('Express server listening on port 9090'); 
+//app.listen(9090);
+//console.log('Express server listening on port 9090'); 
+
+//HTTPS 
+var https = require('https'),      // module for https
+    fs =    require('fs');         // required to read certs and keys
+
+var options = {
+    key:    fs.readFileSync('/sec/certs/server-key.pem'),
+    cert:   fs.readFileSync('/sec/certs/server-cert.pem'),
+    ca:     fs.readFileSync('/sec/certs/gd_bundle-g2.crt'),
+    requestCert:        true,
+    rejectUnauthorized: false,
+};
+
+https.createServer(options, app).listen(4400);
+console.log('HTTPS Express server listening on port 4400'); 
 
 
+var http = require('http');
+http.createServer(function (req, res) {
+    res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
+    //res.writeHead(301, { "Location": "https://localhost:4400" });
+    res.end();
+}).listen(9090);
 
-//HTTPS for PIV 
-// var https = require('https'),      // module for https
-//     fs =    require('fs');         // required to read certs and keys
-
-// var options = {
-//     key:    fs.readFileSync('/sec/certs/server-key.pem'),
-//     cert:   fs.readFileSync('/sec/certs/server-cert.pem'),
-//     ca:     [fs.readFileSync('/sec/certs/gd_bundle-g2.crt'),fs.readFileSync('/sec/certs/HHSPIVcachn.pem')],
-//     requestCert:        true,
-//     rejectUnauthorized: false,
-// };
-
-// https.createServer(options, app).listen(4400);
+console.log('Redirector listening on port 9090'); 
