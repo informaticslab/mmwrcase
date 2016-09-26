@@ -12,20 +12,25 @@ module.exports = function() {
         //console.log(rows);
         //if(rows[0]  && password === rows[0].hash_password) {
         //var myhashed =
+      if (rows.length > 0) {  // found matching user in dbase
         user = {
-          user_id : rows[0].user_id,
-          email   : rows[0].email,
-          hash_password : rows[0].hash_password,
-          user_name : rows[0].user_name,
-          first_name : rows[0].first_name,
-          type       : rows[0].type
+          user_id: rows[0].user_id,
+          email: rows[0].email,
+          hash_password: rows[0].hash_password,
+          user_name: rows[0].user_name,
+          first_name: rows[0].first_name,
+          type: rows[0].type
         }
-        if(user && bcrypt.compareSync(password,user.hash_password)) {
-          return done(null,user);
+        if (user && bcrypt.compareSync(password, user.hash_password)) {
+          return done(null, user);
         }
         else {
-          return done(null,false);
+          return done(null, false);
         }
+      }
+      else {  // invalid username entered,  notify
+        return done(null, false);
+      }
       });
     }
   ));
