@@ -36,6 +36,7 @@ module.exports = function(app) {
   app.get('/api/mmwrcase/getDraftCases',mmwrCase.getDraftCases);
   app.get('/api/mmwrcase/getTopLeaders/:limit',mmwrCase.getTopLeaders);
   app.get('/api/mmwrcase/getTopOrganizations/:limit',mmwrCase.getTopOrganizations);
+  app.get('/api/mmwrcase/getTopCategories/:limit',mmwrCase.getTopCategories);
   app.get('/api/mmwrcase/getUserHistory/:userId',mmwrCase.getUserHistory);
   app.get('/api/mmwrcase/checkUserNameExist/:user_name',mmwrCase.checkUserNameExist);
   app.get('/api/mmwrcase/checkEmailExist/:email',mmwrCase.checkEmailExist);
@@ -65,6 +66,7 @@ module.exports = function(app) {
   app.get( '/api/mmwrcase/getUserProfile/:userId',mmwrCase.getUserProfile);
   app.post('/api/mmwrcase/updateUserProfile', mmwrCase.updateUserProfile);
   app.post('/api/mmwrcase/updateUserHistory', mmwrCase.updateUserHistory);
+  app.post('/api/mmwrcase/removeUser', mmwrCase.removeUser);
   app.get('/partials/*', function(req, res) {
     if (req._passport.session.user) {
       req.params['currentUser'] = req._passport.session.user;

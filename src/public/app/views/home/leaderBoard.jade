@@ -3,7 +3,7 @@
         .col-lg-6.col-md-6
             .panel.panel-default
                 .panel-heading
-                    h3.panel-title Case of The Week Top 5 Leaders
+                    h3.panel-title Case of The Week Top 5 Users
                 .panel-body
                     .table-responsive
                         table.table
@@ -18,15 +18,16 @@
         .col-lg-6.col-md-6
             .panel.panel-default
                 .panel-heading
-                    h3.panel-title Case of The Week Top 5 Organizations
+                    h3.panel-title Case of The Week Top 5 User Categories
                 .panel-body
                     .table-responsive
                         table.table
                             tr
-                                th Organization
+                                th Category
                                 th Case(s) Taken
                                 th Score
-                            tr(ng-repeat='leader in organizations')
-                                td{{leader.organization}}
+                            //tr(ng-repeat='leader in organizations')
+                            tr(ng-repeat='leader in categories')
+                                td{{leader.category}}
                                 td{{leader.case_taken }}
                                 td{{leader.correct_percent | number:2 }}%
