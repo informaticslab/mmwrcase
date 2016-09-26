@@ -19,7 +19,7 @@ body(ng-controller='loginCtrl')
 					label Last Name:
 					input.form-control.input-lg(type='text' ng-model='lastName')
 				.form-group(ng-class="{ 'has-error': updateForm.email.$invalid && updateForm.email.$dirty}")
-					label(style="width:70%")  Email:
+					label(style="width:70%")  Business Email:
 						input.form-control.input-sm(type='email' name='email' placeholder = 'Email' ng-model='userProfile.email' required='' ng-readonly='!editingFlags.emailEdit')
 					label
 						| &nbsp;
@@ -52,8 +52,14 @@ body(ng-controller='loginCtrl')
 						input(type='number' max = '{{masterData.yearsOfPractice.max}}' min = '{{masterData.yearsOfPractice.min}}' ng-model='userProfile.years_of_practice' )
 						| &nbsp&nbsp; ({{masterData.yearsOfPractice.min}} - {{masterData.yearsOfPractice.max}})
 				.form-group
-					label Profession:
-						select.form-control.input-sm(type='text'  placeholder = 'Profession'  ng-options='p as p for p in masterData.professions' ng-model='userProfile.profession')
+					label Category:
+						select.form-control.input-sm(type='text'  placeholder = 'Category'  ng-options='p as p for p in masterData.professions' ng-model='userProfile.profession')
+					label
+						| &nbsp;
+						//input.pull-right(type="checkbox" ng-model="userProfile.leaderboard_opt_category" ng-true-value="1" ng-false-value="0" ng-disabled='!userProfile.med_school')
+						input.pull-right(type="checkbox" ng-model="userProfile.leaderboard_opt_category" ng-true-value="1" ng-false-value="0" ng-disabled='!userProfile.profession')
+						| &nbsp;&nbsp
+					label(style="font-size: 12px;") &nbsp;&nbsp Include on Leaderboard
 				.form-group
 					label Area of Specialty:
 						select.form-control.input-sm(type='text'  placeholder = 'Specialty'  ng-options='s as s for s in masterData.specialties' ng-model='userProfile.specialty')
@@ -75,11 +81,12 @@ body(ng-controller='loginCtrl')
 				.form-group
 					label(style="width:65%") Medical School Association:
 						input.form-control.input-sm(style="width:70%" type="text" ng-model="userProfile.med_school"  placeholder="Search for a school"  typeahead-min-length='1' typeahead="medicalSchool.name for medicalSchool in matchMedSchool($viewValue)")
-					label
+					//label
 						|&nbsp;
+						//input.pull-right(type="checkbox" ng-model="userProfile.leaderboard_opt_school" ng-true-value="1" ng-false-value="0" ng-disabled='!userProfile.med_school')
 						input.pull-right(type="checkbox" ng-model="userProfile.leaderboard_opt_school" ng-true-value="1" ng-false-value="0" ng-disabled='!userProfile.med_school')
 						|&nbsp;&nbsp
-					label(style="font-size: 12px;") &nbsp;&nbsp Include on Leaderboard
+					//label(style="font-size: 12px;") &nbsp;&nbsp Include on Leaderboard
 
 					//select.form-control.input-lg(type='text' placeholder = 'Medical School associated with' typeahead='medicalSchool.id as medicalSchool.name for medicalSchool in masterData.medicalSchools' ng-model='registrationData.medSchoolId')
 						option(value='-1') - Select Medical School  -
