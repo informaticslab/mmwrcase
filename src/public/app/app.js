@@ -183,7 +183,7 @@ mmwrcase.run(['$rootScope','$state','$stateParams','$location','ngIdentity',func
       $rootScope.toState = toState;
       $rootScope.toStateParams = toStateParams;
      if (ngIdentity.isAuthenticated()) {
-         console.log(ngIdentity.currentUser);
+   //      console.log(ngIdentity.currentUser);
      }
   })
 }]);

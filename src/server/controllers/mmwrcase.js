@@ -968,11 +968,23 @@ exports.getTopOrganizations = function(req, res) {
 	})
 };
 
+exports.getTopCategories = function(req, res) {
+	var limitCount = req.params.limit;
+	db.query('select ifnull(b.profession,"Unknown") as category,count(1) as case_taken, sum(result = 1) as correct, sum(result = 1) / count(1) * 100 as correct_percent from mmwr_case.user_history as a left join mmwr_case.user as b on a.user_id = b.user_id where leaderboard_opt_category = "1" group by b.profession order by correct_percent desc limit '+limitCount,[],function(err,result){
+		if (err) {
+			console.log(err);
+			res.send({'error':err});
+		}
+		else {
+			res.send(result);
+		}
+	})
+};
 exports.getUserProfile = function(req,res){
 	var userId = req.params.userId;
 	if (userId == -1) {
-		db.query('select * from mmwr_case.user',[],function(err,result){
-			console.log(result);
+		db.query('select * from mmwr_case.user where enabled <> 2',[],function(err,result){
+			//console.log(result);
 			if (err) {
 				res.send({'error':err});
 			}
@@ -1048,7 +1060,12 @@ exports.removeUser = function(req,res) {
 			res.send({'error':err});
 		}
 		else {
-			res.send(result);
+			if (result.changedRows > 0) {
+				res.send({'success':'Profile delete'});
+			}
+			else {
+				res.send({'success':'nothing changed'});
+			}
 		}
 	})
 };

@@ -358,7 +358,7 @@ var myActivityModalCtrl = function($scope,$modalInstance,$http,ngNotifier,userId
 		$modalInstance.dismiss('cancel');
 	}
 }
-var usersAdminModalCtrl = function($scope,$modalInstance,$http,ngNotifier,ngCase,userId,masterData){
+var usersAdminModalCtrl = function($scope,$modalInstance,$http,ngNotifier,ngCase,userId,masterData,$state,$stateParams){
 	$scope.masterData = masterData;
 	$scope.users;
 	$scope.inputRoles;
@@ -387,19 +387,20 @@ var usersAdminModalCtrl = function($scope,$modalInstance,$http,ngNotifier,ngCase
 		}
 		var answer = confirm('Are you sure you want to delete user '+ user.user_name + ' ?');
 		if (answer) {
-			$http.post('/api/mmwrase/removeUser', user).then(function(res) {
+			$http.post('/api/mmwrcase/removeUser', user).then(function(res) {
 				//console.log(user);
 				if (res.data.success) {
 					ngNotifier.notify('You have deleted user '+ user.user_name);
+					$http.get('/api/mmwrcase/getUserProfile/'+'-1').then(function(res) {
+						if (res.data) {
+							$scope.users = res.data;
+						}
+					});
 				} else {
 					ngNotifier.notifyError('Error deleteing user');
 				}
 			});
-			$state.transitionTo($state.current, $stateParams, {
-				reload: true,
-				inherit: false,
-				notify: true
-			});
+
 		}
 	};
 
