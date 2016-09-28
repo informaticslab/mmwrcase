@@ -78,7 +78,7 @@ body(ng-controller='loginCtrl')
 						label
 							input(type="radio" ng-model='userProfile.public_health_trained' ng-value="0")
 							| &nbsp;No
-				.form-group
+				//.form-group
 					label(style="width:65%") Medical School Association:
 						input.form-control.input-sm(style="width:70%" type="text" ng-model="userProfile.med_school"  placeholder="Search for a school"  typeahead-min-length='1' typeahead="medicalSchool.name for medicalSchool in matchMedSchool($viewValue)")
 					//label
