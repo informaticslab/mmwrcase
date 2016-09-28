@@ -3,6 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+httpsPort = 4400;
+httpPort = 9090;
+var path = require('path');
+var rootPath = path.normalize(__dirname + '/');
+var properties = require('./server/lib/envProperties');
 var express = require('express'),
     app = express();
 
@@ -19,25 +24,28 @@ require('./server/config/passport')();
 
 require('./server/config/routes.js')(app);
 
+if(properties.USESSL == 'false')
+{
 
-
-//app.listen(9090);
-//console.log('Express server listening on port 9090'); 
-
+app.listen(httpPort);
+console.log('Express server listening on port ' + httpPort); 
+}
+else if (properties.USESSL == 'true')
+{
 //HTTPS 
 var https = require('https'),      // module for https
     fs =    require('fs');         // required to read certs and keys
 
 var options = {
-    key:    fs.readFileSync('/sec/certs/server-key.pem'),
-    cert:   fs.readFileSync('/sec/certs/server-cert.pem'),
-    ca:     fs.readFileSync('/sec/certs/gd_bundle-g2.crt'),
+    key:    fs.readFileSync(properties.SSL_KEY),
+    cert:   fs.readFileSync(properties.SSL_CERT),
+    ca:     fs.readFileSync(properties.SSL_BUNDLE),
     requestCert:        true,
     rejectUnauthorized: false,
 };
 
-https.createServer(options, app).listen(4400);
-console.log('HTTPS Express server listening on port 4400'); 
+https.createServer(options, app).listen(httpsPort);
+console.log('HTTPS Express server listening on port ' + httpsPort); 
 
 
 var http = require('http');
@@ -45,6 +53,7 @@ http.createServer(function (req, res) {
     res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
     //res.writeHead(301, { "Location": "https://localhost:4400" });
     res.end();
-}).listen(9090);
+}).listen(httpPort);
 
-console.log('Redirector listening on port 9090'); 
+console.log('Redirector listening on port ' + httpPort); 
+}
