@@ -884,6 +884,7 @@ exports.getMasterData = function(req,res) {
 	var masterData = require('../data/masterData.json');
 	db.query('select * from mmwr_case.schools',function(err,result){
 		if (err) {
+			console.log('error from get masterdata ', err);
 			res.send({'error': err});
 		}
 		else {
