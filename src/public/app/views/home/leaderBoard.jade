@@ -15,7 +15,7 @@
                                 td{{leader.user_name}}
                                 td(style='text-align:center'){{leader.case_taken }}
                                 td(style='text-align:right'){{leader.correct_percent | number:2 }}
-                                    <span (ng-show='leader.correct_percent')>%</span>
+                                  span(ng-show='leader.user_name != null') %
         .col-lg-6.col-md-6
             .panel.panel-default
                 .panel-heading
@@ -32,4 +32,4 @@
                                 td{{leader.category}}
                                 td(style='text-align:center'){{leader.case_taken }}
                                 td(style='text-align:right') {{leader.correct_percent | number:2 }}
-                                    <span (ng-show='leader.correct_percent')>%</span>
+                                    span(ng-show='leader.category != null') %
