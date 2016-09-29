@@ -9,12 +9,13 @@
                         table.table
                             tr
                                 th User
-                                th Case(s) Taken
-                                th Score
+                                th(style='text-align:center') Case(s) Taken
+                                th(style='text-align:right') Score
                             tr(ng-repeat='leader in leaders')
                                 td{{leader.user_name}}
-                                td{{leader.case_taken }}
-                                td{{leader.correct_percent | number:2 }}%
+                                td(style='text-align:center'){{leader.case_taken }}
+                                td(style='text-align:right'){{leader.correct_percent | number:2 }}
+                                    <span (ng-show='leader.correct_percent')>%</span>
         .col-lg-6.col-md-6
             .panel.panel-default
                 .panel-heading
@@ -24,10 +25,11 @@
                         table.table
                             tr
                                 th Category
-                                th Case(s) Taken
-                                th Score
+                                th(style='text-align:center') Case(s) Taken
+                                th(style='text-align:right') Score
                             //tr(ng-repeat='leader in organizations')
                             tr(ng-repeat='leader in categories')
                                 td{{leader.category}}
-                                td{{leader.case_taken }}
-                                td{{leader.correct_percent | number:2 }}%
+                                td(style='text-align:center'){{leader.case_taken }}
+                                td(style='text-align:right') {{leader.correct_percent | number:2 }}
+                                    <span (ng-show='leader.correct_percent')>%</span>
