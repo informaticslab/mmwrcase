@@ -8,7 +8,7 @@ module.exports = function() {
     passwordField: 'password'
   },
     function(email, password, done) {
-      db.query('select * from user where email = "' + email + '"' , function(err, rows) {
+      db.query('select * from user where enabled <> 2 and email = "' + email + '"' , function(err, rows) {
         //console.log(rows);
         //if(rows[0]  && password === rows[0].hash_password) {
         //var myhashed =
@@ -19,9 +19,12 @@ module.exports = function() {
           hash_password: rows[0].hash_password,
           user_name: rows[0].user_name,
           first_name: rows[0].first_name,
-          type: rows[0].type
+          type: rows[0].type,
+          profession : rows[0].profession
         }
         if (user && bcrypt.compareSync(password, user.hash_password)) {
+          // remove hashed password before returnning to app
+          delete user.hash_password;
           return done(null, user);
         }
         else {
