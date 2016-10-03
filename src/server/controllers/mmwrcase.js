@@ -1055,20 +1055,29 @@ exports.updateUserProfile = function(req,res){
 
 exports.removeUser = function(req,res) {
 	var user_id = req.body.user_id;
-	db.query('update mmwr_case.user set enabled = 2 where user_id = ?',[user_id],function(err,result){
-		//	console.log(result);
-		if (err) {
-			res.send({'error':err});
+	db.query('INSERT INTO mmwr_case.user_deleted SELECT * from mmwr_case.user where user_id = ?;',[user_id],function(err2,result2){
+		if (err2) {
+			console.log('insert error', err2);
+			res.send({'error': err2});
 		}
 		else {
-			if (result.changedRows > 0) {
-				res.send({'success':'Profile delete'});
-			}
-			else {
-				res.send({'success':'nothing changed'});
-			}
+			db.query('delete from mmwr_case.user where user_id = ?', [user_id], function (err, result) {
+				//	console.log(result);
+				if (err) {
+					res.send({'error': err});
+				}
+				else {
+					if (result.changedRows > 0) {
+						res.send({'success': 'Profile delete'});
+					}
+					else {
+						res.send({'success': 'nothing changed'});
+					}
+				}
+			})
 		}
 	})
+
 };
 
 function reformatForMySQL(arrayObject) {
