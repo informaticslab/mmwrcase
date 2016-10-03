@@ -67,17 +67,36 @@ angular.module('app').controller('loginCtrl',function($scope,$http,ngIdentity,ng
 		//	last_name: $scope.lastName
 		//};
 		//console.log('vadiation status ', isValid);
-		if (isValid) {
-			$http.post('/api/mmwrcase/createLogin', $scope.registrationData).then(function (res) {
-				if (res.data.success) {
-					ngNotifier.notify("Registration was successful. Please continue to login.")
-					$scope.ok();
+		$http.get('/api/mmwrcase/checkEmailExist/'+  $scope.registrationData.email).then(function(res) {
+		if (res.data == 'true') {
+					ngNotifier.notifyError('Sorry, this email address is already being used for this site.  Please use another email.');
+					isValid = false;
+				}
+		else {
+			$http.get('/api/mmwrcase/checkUserNameExist/'+ $scope.registrationData.user_name).then(function(res2) {
+				if (res2.data=='true') {
+					ngNotifier.notifyError('Sorry, this user name is already exist.  Please use another user name.');
+					isValid = false;
 				}
 				else {
-					ngNotifier.notifyError('Registrattion was not successful. Please contact the site administrator for assistance');
+						$http.post('/api/mmwrcase/createLogin', $scope.registrationData).then(function (res3) {
+							if (res3.data.success) {
+								ngNotifier.notify("Registration was successful. Please continue to login.")
+								$scope.ok();
+							}
+							else {
+								ngNotifier.notifyError('Registrattion was not successful. Please contact the site administrator for assistance');
+							}
+						});
+
 				}
-			});
+			})
 		}
+		})
+
+
+
+
 	}
 
 	$scope.matchMedSchool = function(val){

@@ -445,6 +445,8 @@ exports.createLogin = function(req,res) {
 		var emailParts = userData.email.split('@');
 		userData.user_name = emailParts[0];
 	}
+	userData.user_name.toLowerCase();
+	userData.email.toLowerCase();
 	userData.salt = encrypt.createSalt();
 	userData.hash_password  = encrypt.hashPwd(userData.password,userData.salt);
 	//userData.hash_password = userData.password;
@@ -509,7 +511,7 @@ exports.updateAnswer = function(req,res) {
 }
 
 exports.checkUserNameExist = function(req,res) {
-	var user_name = req.params.user_name;
+	var user_name = req.params.user_name.toLowerCase();
 	db.query('select 1 from mmwr_case.user where user_name = ?',[user_name],function(err,result){
 		if (err) {
 			console.log(err);
@@ -528,7 +530,7 @@ exports.checkUserNameExist = function(req,res) {
 };
 
 exports.checkEmailExist = function(req,res) {
-	var email = req.params.email;
+	var email = req.params.email.toLowerCase();
 	db.query('select 1 from mmwr_case.user where email = ?',[email],function(err,result){
 		if (err) {
 			console.log(err);
