@@ -45,7 +45,7 @@ module.exports = function() {
   });
 
   passport.deserializeUser(function(user, done) {
-    console.log('session user', user)
+   // console.log('session user', user)
     db.query("select * from user where user_id = "+user.user_id, function(err,rows) {
     user = rows[0];
       done(err, user);
