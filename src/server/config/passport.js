@@ -8,7 +8,7 @@ module.exports = function() {
     passwordField: 'password'
   },
     function(email, password, done) {
-      db.query('select * from user where enabled <> 2 and email = "' + email + '"' , function(err, rows) {
+      db.query('select * from user where email = "' + email + '"' , function(err, rows) {
         //console.log(rows);
         //if(rows[0]  && password === rows[0].hash_password) {
         //var myhashed =
