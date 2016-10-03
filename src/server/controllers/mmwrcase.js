@@ -910,8 +910,9 @@ exports.saveResult = function(req,res) {
 
 exports.getUserHistory = function(req,res) {
 	var user_id = req.params.userId;
-	db.query('select user_id,a.case_id,title,date_completed,result,rated from user_history a left join case_main b on a.case_id = b.case_id where user_id = ? ',[user_id],function(err,result){
-		if (err) {
+//	db.query('select user_id,a.case_id,title,date_completed,result,rated from user_history a left join case_main b on a.case_id = b.case_id where user_id = ? ',[user_id],function(err,result){
+	db.query('select user_id,a.case_id,title,date_completed,result,rated from user_history a join case_main b on a.case_id = b.case_id where user_id = ? ',[user_id],function(err,result){
+			if (err) {
 			console.log(err);
 			res.send({'error':err});
 		}
@@ -946,8 +947,10 @@ exports.updateUserHistory = function(req,res) {
 
 exports.getTopLeaders = function(req,res) {
 	var limitCount = req.params.limit;
-	db.query('select b.user_name,a.user_id,count(1) as case_taken, sum(result = 1) as correct, sum(result = 1) / count(1) * 100 as correct_percent from mmwr_case.user_history as a left join mmwr_case.user as b on a.user_id = b.user_id  group by user_id order by correct_percent desc limit '+ limitCount,[],function(err,result){
-		if (err) {
+	//db.query('select b.user_name,a.user_id,count(1) as case_taken, sum(result = 1) as correct, sum(result = 1) / count(1) * 100 as correct_percent from mmwr_case.user_history as a left join mmwr_case.user as b on a.user_id = b.user_id  group by user_id order by correct_percent desc limit '+ limitCount,[],function(err,result){
+	db.query('select b.user_name,a.user_id,count(1) as case_taken, sum(result = 1) as correct, sum(result = 1) / count(1) * 100 as correct_percent from mmwr_case.user_history as a join mmwr_case.user as b on a.user_id = b.user_id  group by user_id order by correct_percent desc limit '+ limitCount,[],function(err,result){
+
+			if (err) {
 			res.send({'error':err});
 		}
 		else {
@@ -958,8 +961,10 @@ exports.getTopLeaders = function(req,res) {
 
 exports.getTopOrganizations = function(req, res) {
 	var limitCount = req.params.limit;
-	db.query('select b.med_school as organization,count(1) as case_taken, sum(result = 1) as correct, sum(result = 1) / count(1) * 100 as correct_percent from mmwr_case.user_history as a left join mmwr_case.user as b on a.user_id = b.user_id where leaderboard_opt_school = "1" group by med_school order by correct_percent desc limit '+limitCount,[],function(err,result){
-		if (err) {
+	//db.query('select b.med_school as organization,count(1) as case_taken, sum(result = 1) as correct, sum(result = 1) / count(1) * 100 as correct_percent from mmwr_case.user_history as a left join mmwr_case.user as b on a.user_id = b.user_id where leaderboard_opt_school = "1" group by med_school order by correct_percent desc limit '+limitCount,[],function(err,result){
+	db.query('select b.med_school as organization,count(1) as case_taken, sum(result = 1) as correct, sum(result = 1) / count(1) * 100 as correct_percent from mmwr_case.user_history as a join mmwr_case.user as b on a.user_id = b.user_id where leaderboard_opt_school = "1" group by med_school order by correct_percent desc limit '+limitCount,[],function(err,result){
+
+			if (err) {
 			console.log(err);
 			res.send({'error':err});
 		}
@@ -971,7 +976,7 @@ exports.getTopOrganizations = function(req, res) {
 
 exports.getTopCategories = function(req, res) {
 	var limitCount = req.params.limit;
-	db.query('select ifnull(b.profession,"Unknown") as category,count(1) as case_taken, sum(result = 1) as correct, sum(result = 1) / count(1) * 100 as correct_percent from mmwr_case.user_history as a left join mmwr_case.user as b on a.user_id = b.user_id where leaderboard_opt_category = "1" group by b.profession order by correct_percent desc limit '+limitCount,[],function(err,result){
+	db.query('select ifnull(b.profession,"Unknown") as category,count(1) as case_taken, sum(result = 1) as correct, sum(result = 1) / count(1) * 100 as correct_percent from mmwr_case.user_history as a join mmwr_case.user as b on a.user_id = b.user_id where leaderboard_opt_category = "1" group by b.profession order by correct_percent desc limit '+limitCount,[],function(err,result){
 		if (err) {
 			console.log(err);
 			res.send({'error':err});
