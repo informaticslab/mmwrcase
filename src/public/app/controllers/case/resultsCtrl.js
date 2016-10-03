@@ -22,7 +22,8 @@ angular.module('app').controller('resultsCtrl', function($scope, ngTest, ngCase,
 							case_id: $stateParams.caseID,
 							question_id: $stateParams.questionID,
 							selected_answer: $stateParams.selectedAnswerID,
-							result: $scope.answerStats[i].correct
+							result: $scope.answerStats[i].correct,
+							profession : ngIdentity.currentUser.profession
 						};
 						ngCase.saveResult(data);
 						break;
